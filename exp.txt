@@ -1,0 +1,23 @@
+INTEGER Routine fun ( var1)
+INTEGER a  ;  
+a=var1;
+If (a>var1)Then var1=a; Else var1=a;EndIf
+fun=a;
+ENDR
+INTEGER Routine xxx ( var2)
+INTEGER c ;  
+c=3;
+If (c>var2)Then var2=c; Else var2=c;EndIf
+fun=a;
+ENDR
+PROGRAM
+prog
+REAL A DIMENSION (1,2);
+INTEGER a; 
+Logical b; 
+n=2;
+% test test 
+READ(a);
+DoWhile (true) WRITE("test",n); EndDo
+WRITE("test",n); 
+END
