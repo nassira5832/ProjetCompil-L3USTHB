@@ -6,7 +6,7 @@ fun=a;
 ENDR
 INTEGER Routine xxx ( var2)
 INTEGER c ;  
-c=3;
+c=3.5;
 If (c>var2)Then var2=c; Else var2=c;EndIf
 fun=a;
 ENDR

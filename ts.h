@@ -7,7 +7,7 @@ typedef struct ElementIdfCst {
     char name[20];
     char code[20];
     char type[20];
-    char value[200];
+    char value[20];
     struct ElementIdfCst* next;
 } ElementIdfCst;
 

@@ -530,13 +530,13 @@ static const yytype_uint16 yyrline[] =
        0,    52,    52,    51,    56,    57,    58,    60,    60,    67,
       68,    70,    71,    72,    73,    75,    75,    77,    78,    80,
       81,    84,    85,    86,    87,    88,    89,    90,    92,    93,
-      99,   101,   100,   112,   119,   120,   125,   127,   126,   138,
-     139,   146,   155,   161,   162,   164,   164,   172,   172,   186,
-     187,   189,   190,   191,   195,   201,   207,   214,   216,   217,
-     224,   231,   232,   234,   236,   237,   238,   239,   241,   240,
-     252,   259,   266,   273,   280,   282,   283,   285,   284,   296,
-     303,   304,   306,   305,   317,   325,   327,   334,   342,   344,
-     345,   346,   347,   348,   349,   350,   351,   352,   353
+      99,   101,   100,   112,   121,   122,   127,   129,   128,   140,
+     141,   148,   157,   163,   164,   166,   166,   174,   174,   188,
+     189,   191,   192,   193,   197,   203,   209,   216,   218,   219,
+     226,   233,   234,   236,   238,   239,   240,   241,   243,   242,
+     254,   261,   268,   275,   282,   284,   285,   287,   286,   298,
+     305,   306,   308,   307,   319,   327,   329,   336,   344,   346,
+     347,   348,   349,   350,   351,   352,   353,   354,   355
 };
 #endif
 
@@ -1687,14 +1687,16 @@ yyreduce:
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {
         printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", (yyvsp[(1) - (4)].strVal));
+        printf(buffer);
     }
+    printf(buffer);
 ;}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 127 "bisony.y"
+#line 129 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (3)].strVal)) == 0) {
@@ -1706,7 +1708,7 @@ yyreduce:
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 132 "bisony.y"
+#line 134 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(3) - (4)].strVal)) == 0) {
@@ -1718,7 +1720,7 @@ yyreduce:
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 140 "bisony.y"
+#line 142 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(3) - (3)].strVal)) == 0) {
@@ -1730,7 +1732,7 @@ yyreduce:
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 147 "bisony.y"
+#line 149 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (3)].strVal)) == 0) {
@@ -1742,7 +1744,7 @@ yyreduce:
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 155 "bisony.y"
+#line 157 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (1)].strVal)) == 0) {
@@ -1754,7 +1756,7 @@ yyreduce:
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 164 "bisony.y"
+#line 166 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (7)].strVal)) == 0) {
@@ -1766,14 +1768,14 @@ yyreduce:
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 170 "bisony.y"
+#line 172 "bisony.y"
     { if((yyvsp[(4) - (8)].INTEGER)<=0 || (yyvsp[(6) - (8)].INTEGER)<=0) printf("File \"%s\" , line %d , CHARACTER %d :semantic error ( La taille de tableau ne doit pas etre inferieur ou égale à null ) \n",f,nb_line,col);;}
     break;
 
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 172 "bisony.y"
+#line 174 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (5)].strVal)) == 0) {
@@ -1785,14 +1787,14 @@ yyreduce:
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 179 "bisony.y"
+#line 181 "bisony.y"
     { if((yyvsp[(4) - (6)].INTEGER)<=0) printf("File \"%s\" , line %d , CHARACTER %d :semantic error ( La taille de tableau ne doit pas etre inferieur ou égale à null ) \n",f,nb_line,col);;}
     break;
 
   case 54:
 
 /* Line 1455 of yacc.c  */
-#line 195 "bisony.y"
+#line 197 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (6)].strVal)) == 0) {
@@ -1804,7 +1806,7 @@ yyreduce:
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 201 "bisony.y"
+#line 203 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {
@@ -1816,7 +1818,7 @@ yyreduce:
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 207 "bisony.y"
+#line 209 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(3) - (5)].strVal)) == 0) {
@@ -1828,7 +1830,7 @@ yyreduce:
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 217 "bisony.y"
+#line 219 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (2)].strVal)) == 0) {
@@ -1840,7 +1842,7 @@ yyreduce:
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 225 "bisony.y"
+#line 227 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(2) - (3)].strVal)) == 0) {
@@ -1852,7 +1854,7 @@ yyreduce:
   case 68:
 
 /* Line 1455 of yacc.c  */
-#line 241 "bisony.y"
+#line 243 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (3)].strVal)) == 0) {
@@ -1864,7 +1866,7 @@ yyreduce:
   case 69:
 
 /* Line 1455 of yacc.c  */
-#line 246 "bisony.y"
+#line 248 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(3) - (4)].strVal)) == 0) {
@@ -1876,7 +1878,7 @@ yyreduce:
   case 70:
 
 /* Line 1455 of yacc.c  */
-#line 253 "bisony.y"
+#line 255 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (3)].strVal)) == 0) {
@@ -1888,7 +1890,7 @@ yyreduce:
   case 71:
 
 /* Line 1455 of yacc.c  */
-#line 260 "bisony.y"
+#line 262 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (3)].strVal)) == 0) {
@@ -1900,7 +1902,7 @@ yyreduce:
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 267 "bisony.y"
+#line 269 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(3) - (3)].strVal)) == 0) {
@@ -1912,7 +1914,7 @@ yyreduce:
   case 73:
 
 /* Line 1455 of yacc.c  */
-#line 274 "bisony.y"
+#line 276 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(3) - (3)].strVal)) == 0) {
@@ -1924,7 +1926,7 @@ yyreduce:
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 285 "bisony.y"
+#line 287 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (3)].strVal)) == 0) {
@@ -1936,7 +1938,7 @@ yyreduce:
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 290 "bisony.y"
+#line 292 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(3) - (4)].strVal)) == 0) {
@@ -1948,7 +1950,7 @@ yyreduce:
   case 79:
 
 /* Line 1455 of yacc.c  */
-#line 297 "bisony.y"
+#line 299 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(3) - (3)].strVal)) == 0) {
@@ -1960,7 +1962,7 @@ yyreduce:
   case 82:
 
 /* Line 1455 of yacc.c  */
-#line 306 "bisony.y"
+#line 308 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (3)].strVal)) == 0) {
@@ -1972,7 +1974,7 @@ yyreduce:
   case 83:
 
 /* Line 1455 of yacc.c  */
-#line 311 "bisony.y"
+#line 313 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(3) - (4)].strVal)) == 0) {
@@ -1984,7 +1986,7 @@ yyreduce:
   case 84:
 
 /* Line 1455 of yacc.c  */
-#line 318 "bisony.y"
+#line 320 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(3) - (3)].strVal)) == 0) {
@@ -1996,7 +1998,7 @@ yyreduce:
   case 86:
 
 /* Line 1455 of yacc.c  */
-#line 328 "bisony.y"
+#line 330 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(4) - (8)].strVal)) == 0) {
@@ -2008,7 +2010,7 @@ yyreduce:
   case 87:
 
 /* Line 1455 of yacc.c  */
-#line 335 "bisony.y"
+#line 337 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (8)].strVal)) == 0) {
@@ -2020,7 +2022,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 2024 "bisony.tab.c"
+#line 2026 "bisony.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2232,7 +2234,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 355 "bisony.y"
+#line 357 "bisony.y"
 
 main () 
 {

@@ -4,11 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ts.h" 
+#include "quad.h"
 
 extern int nb_line;
 extern int col;
 extern YYSTYPE yylval;
 extern char save_type[20];
+
 extern char buffer[200];
 
 
@@ -56,7 +58,7 @@ DIMENSION  { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_DI
         printf("L'identificateur %s dans la ligne %d est trop grand !\n", yytext, nb_line);
     } else {
         // Insérer l'identificateur dans la table des identificateurs
-        insertIdfCst(yytext, "idf", save_type, strdup("0"));
+         insertIdfCst(yytext, "idf", save_type, buffer);
         yylval.strVal = strdup(yytext);
         return IDENTIFIER;
     }

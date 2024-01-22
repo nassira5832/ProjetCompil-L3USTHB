@@ -481,10 +481,11 @@ extern int nb_line;
 extern int col;
 extern YYSTYPE yylval;
 extern char save_type[20];
+
 extern char buffer[200];
 
 
-#line 488 "lex.yy.c"
+#line 489 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -635,10 +636,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 26 "lexo.l"
+#line 27 "lexo.l"
 
 
-#line 642 "lex.yy.c"
+#line 643 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -723,124 +724,124 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 28 "lexo.l"
+#line 29 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Program; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 29 "lexo.l"
+#line 30 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Begin;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 30 "lexo.l"
+#line 31 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_End;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 31 "lexo.l"
+#line 32 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Routine;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 32 "lexo.l"
+#line 33 "lexo.l"
 {insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_ENDR;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 33 "lexo.l"
+#line 34 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_Integer;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 34 "lexo.l"
+#line 35 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_Real;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 35 "lexo.l"
+#line 36 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_Logical;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 36 "lexo.l"
+#line 37 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Character;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 37 "lexo.l"
+#line 38 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_If; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 39 "lexo.l"
+#line 40 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Then;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 40 "lexo.l"
+#line 41 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Else;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 41 "lexo.l"
+#line 42 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_Dowhile;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 42 "lexo.l"
+#line 43 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_For;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 43 "lexo.l"
+#line 44 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_EndIf;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 44 "lexo.l"
+#line 45 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_EndDo;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 45 "lexo.l"
+#line 46 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_READ; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 46 "lexo.l"
+#line 47 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_WRITE ;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 47 "lexo.l"
+#line 48 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_CALL; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 48 "lexo.l"
+#line 49 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_EQUIVALENCE ; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 49 "lexo.l"
+#line 50 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_DIMENSION ;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 51 "lexo.l"
+#line 52 "lexo.l"
 return Logical;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 53 "lexo.l"
+#line 54 "lexo.l"
 {
     // Vérifier la longueur de l'identificateur
     if (yyleng > 10) {
         printf("L'identificateur %s dans la ligne %d est trop grand !\n", yytext, nb_line);
     } else {
         // Insérer l'identificateur dans la table des identificateurs
-        insertIdfCst(yytext, "idf", save_type, "0");
+         insertIdfCst(yytext, "idf", save_type, buffer);
         yylval.strVal = strdup(yytext);
         return IDENTIFIER;
     }
@@ -848,7 +849,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 64 "lexo.l"
+#line 65 "lexo.l"
 {
     yylval.INTEGER = atoi(yytext);
     if (yylval.INTEGER < -32768 || yylval.INTEGER > 32767) {
@@ -860,7 +861,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 73 "lexo.l"
+#line 74 "lexo.l"
 {
     yylval.Real = atof(yytext);
     if (yylval.Real < -32768.32768 || yylval.Real > 32767.32767) {
@@ -872,130 +873,130 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 82 "lexo.l"
+#line 83 "lexo.l"
 return CHARACTER ;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 86 "lexo.l"
+#line 87 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return PV;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 87 "lexo.l"
+#line 88 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return AFF;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 88 "lexo.l"
+#line 89 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return V ;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 89 "lexo.l"
+#line 90 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return ADD ;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 90 "lexo.l"
+#line 91 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return SOUS;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 91 "lexo.l"
+#line 92 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return MUL;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 92 "lexo.l"
+#line 93 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return DIV;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 93 "lexo.l"
+#line 94 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return PO;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 94 "lexo.l"
+#line 95 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return PF; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 95 "lexo.l"
+#line 96 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return AO;} 
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 97 "lexo.l"
+#line 98 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return AF; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 98 "lexo.l"
+#line 99 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return EQ ;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 99 "lexo.l"
+#line 100 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return NE ; } 
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 100 "lexo.l"
+#line 101 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return LT ; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 101 "lexo.l"
+#line 102 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return LE ; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 102 "lexo.l"
+#line 103 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return GE ;} 
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 103 "lexo.l"
+#line 104 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return GL ;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 104 "lexo.l"
+#line 105 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return OR; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 105 "lexo.l"
+#line 106 "lexo.l"
 { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return AND; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 107 "lexo.l"
+#line 108 "lexo.l"
 /* Commentaire */ 
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 108 "lexo.l"
+#line 109 "lexo.l"
 
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 110 "lexo.l"
+#line 111 "lexo.l"
 nb_line++;
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 111 "lexo.l"
+#line 112 "lexo.l"
 {printf ("erreur lexicale: entite non reconnue a la ligne %d\n",nb_line);}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 114 "lexo.l"
+#line 115 "lexo.l"
 ECHO;
 	YY_BREAK
-#line 999 "lex.yy.c"
+#line 1000 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1881,4 +1882,4 @@ int main()
 	return 0;
 	}
 #endif
-#line 114 "lexo.l"
+#line 115 "lexo.l"

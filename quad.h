@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 typedef struct qdr{
 
@@ -9,9 +12,6 @@ typedef struct qdr{
   }qdr;
   qdr quad[1000];
 extern int qc;
-
-
-
 
 void quadr(char op[],char arg1[],char arg2[],char result[])
 {

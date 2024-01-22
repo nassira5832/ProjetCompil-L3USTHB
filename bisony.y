@@ -114,7 +114,9 @@ affectation: var1 AFF expression PV
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration($1) == 0) {
         printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
+        printf(buffer);
     }
+    printf(buffer);
 }
 			 |var1 AFF Const PV         
 			 |IDENTIFIER AFF Const PV  
@@ -187,8 +189,8 @@ var1: mat1
 	 |tab1;
 	
 Const : INTEGER   // { sprintf(buffer, "%d", $1); printf(buffer) }
-      | CHARACTER // { strcpy(buffer,$1); printf(buffer) }
-      | Real      // { sprintf(buffer, "%f", $1);printf(buffer) } 
+      | CHARACTER  //{ strcpy(buffer,$1); printf(buffer) }
+      | Real     // { sprintf(buffer, "%f", $1);printf(buffer) } 
 
 
 		
