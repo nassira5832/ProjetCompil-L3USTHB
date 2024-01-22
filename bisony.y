@@ -5,7 +5,7 @@
 
 
 int yylex(void);
-
+int qc =0 ; 
 int yywrap(void);
 int nb_line = 1 , col = 1 ; 
 char* current_variable_name = NULL;
