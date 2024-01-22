@@ -1,13 +1,13 @@
-INTEGER Routine fun ( var1)
-INTEGER a  ;  
-a=var1;
-If (a>var1)Then var1=a; Else var1=a;EndIf
-fun=a;
+INTEGER Routine fun (var1)
+INTEGER a, b ;  
+a=var1; 
+If(a .EQ. var1 .OR. a .GL. var1)Then var1=5; Else var1=a;EndIf
+fun=3;
 ENDR
 INTEGER Routine xxx ( var2)
 INTEGER c ;  
 c=3.5;
-If (c>var2)Then var2=c; Else var2=c;EndIf
+If (c .LT. var2)Then var2=c; Else var2=c;EndIf
 fun=a;
 ENDR
 PROGRAM
@@ -16,8 +16,8 @@ REAL A DIMENSION (1,2);
 INTEGER a; 
 Logical b; 
 n=2;
-% test test 
-READ(a);
+%test test 
+READ(b);
 DoWhile (true) WRITE("test",n); EndDo
 WRITE("test",n); 
 END

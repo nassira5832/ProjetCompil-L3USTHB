@@ -9,11 +9,11 @@ int qc =0 ;
 int yywrap(void);
 int nb_line = 1 , col = 1 ; 
 char* current_variable_name = NULL;
-
+char tmp[20],tmp2[20],tmp3[20],type[20],tmp4[20],tmp6[20],tmp7[20];
 char* f; 
 char buffer[200] ;
 char save_type[20];
-
+int t=0;
 
 
 
@@ -32,12 +32,12 @@ char save_type[20];
 %token <strVal> IDENTIFIER
 %token <INTEGER> INTEGER
 %token  <Real> Real
-%token <Logical> Logical <strVal> CHARACTER
-%token Kw_Program Kw_Begin Kw_End Kw_Routine Kw_ENDR Kw_Integer Kw_Real Kw_Logical Kw_Character
+%token <Logical> Logical <strVal> CHARACTER 
+%token Kw_Program Kw_Begin Kw_End Kw_Routine Kw_ENDR Kw_Integer Kw_Real Kw_Logical Kw_Character 
 %token Kw_If Kw_Then Kw_Else Kw_Dowhile Kw_For Kw_EndDo Kw_READ Kw_WRITE Kw_CALL Kw_EQUIVALENCE Kw_DIMENSION 
 %token  PO PF AO AF V PV AFF   ADD DIV MUL SOUS  
 %token Kw_EndIf 
-%token  OR AND
+%token  or and
 %token EQ NE LT LE GE GL 
 
 
@@ -45,7 +45,7 @@ char save_type[20];
 
 %left '+' '-'
 %left '*' '/'
-%left LE GL LT GE EQ NE
+
 %%
   
 S:  fonctions main_program 
@@ -53,30 +53,35 @@ S:  fonctions main_program
 					 YYACCEPT;
 					 }
 {strcpy(save_type,"CHARACTER");};
-main_program: Kw_Program IDENTIFIER  declarations inst_list Kw_End {strcpy(save_type,"CHARACTER");};
+
+
+/*******************Fonction****************************/
+
 fonctions: fonction 
 		  |fonctions  fonction;
 
 fonction: TYPE Kw_Routine IDENTIFIER PO parameter_list PF declarations inst_list affectation  Kw_ENDR {strcpy(save_type,"CHARACTER");}
-         { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($3) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3);
-    }
-}
+         {  if (check_declaration($3) == 0) {
+              printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3); }
+         }
+
+/////////la liste des parametres /////////////////      
 parameter_list: var V parameter_list
 				| var;
-
+ /////////Les types ////////////////////////////
 TYPE: Kw_Real  {strcpy(save_type,"Real");}
      | Kw_Logical  {strcpy(save_type,"Logical");}
 	 | Kw_Character {strcpy(save_type,"CHARACTER");}
 	 | Kw_Integer {strcpy(save_type,"INTEGER");};
-
+///////Declarations ///////////////////////////
 declarations: TYPE var declaration_2 |TYPE var declaration_2 declarations
    
 declaration_2: V var declaration_2 
               | PV;
 
+
+/******************************Main programme ***********************************************/
+main_program: Kw_Program IDENTIFIER  declarations inst_list Kw_End {strcpy(save_type,"CHARACTER");};
 inst_list: instruction
            | inst_list  instruction ;
 
@@ -89,96 +94,41 @@ instruction: affectation
 			| Appelf 
 			| Equivalence;
 
+///////////affecation////////////////////////
 affectation: var1 AFF expression PV 
-             |IDENTIFIER AFF expression PV { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}
-			 |var1 AFF var1 PV 
-			 |IDENTIFIER AFF IDENTIFIER PV
-			 { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($3) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3);
-    }
-}
-			 |IDENTIFIER AFF var1 PV
-			 { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-        printf(buffer);
-    }
-    printf(buffer);
-}
+             |IDENTIFIER AFF expression PV 
 			 |var1 AFF Const PV         
-			 |IDENTIFIER AFF Const PV  
+			 |IDENTIFIER AFF Const PV 
+             |var1 AFF var1 PV 
+			 |IDENTIFIER AFF IDENTIFIER PV
+             |IDENTIFIER AFF var1 PV
+              
 			 
            
           
 
 expression: var1 OPERATOR var1
-			|IDENTIFIER OPERATOR IDENTIFIER  
-			{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($3) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3);
-    }
-}
+			|IDENTIFIER OPERATOR IDENTIFIER 
             |Logical
-			| var1 OPERATOR IDENTIFIER
-			{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($3) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3);
-    }
-}
-            | IDENTIFIER OPERATOR var1 
-			{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}
-		    
-//var pour declarer 
-var: IDENTIFIER { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}
+			|var1 OPERATOR IDENTIFIER
+			|IDENTIFIER OPERATOR var1 
+			 
+var: IDENTIFIER 
      | mat 
 	 | tab ;
 
 mat: IDENTIFIER  Kw_DIMENSION PO INTEGER V INTEGER PF { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}
-			{ if($4<=0 || $6<=0) printf("File \"%s\" , line %d , CHARACTER %d :semantic error ( La taille de tableau ne doit pas etre inferieur ou égale à null ) \n",f,nb_line,col);}
+    
+			{ if($4<=0 || $6<=0) printf("File \"%s\" , line %d , CHARACTER %d :semantic error ( La taille de tableau ne doit pas etre inferieur ou égale à null ) \n",f,nb_line,col);}}
 			
 tab: IDENTIFIER Kw_DIMENSION PO INTEGER PF { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration($1) == 0) {
         printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
     }
-}
-          
 			{ if($4<=0) printf("File \"%s\" , line %d , CHARACTER %d :semantic error ( La taille de tableau ne doit pas etre inferieur ou égale à null ) \n",f,nb_line,col);}
+
+}
             
                
         
@@ -206,6 +156,9 @@ tab1: IDENTIFIER  PO INTEGER PF {
         printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
     }
 }
+
+
+/////////////////entrees//////////////////////////////////
 Entrees: Kw_READ PO IDENTIFIER PF PV { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration($3) == 0) {
@@ -213,140 +166,37 @@ Entrees: Kw_READ PO IDENTIFIER PF PV {
     }
 }
 
+
+//////////////Sortie////////////////////////////////////
 Sorties: Kw_WRITE PO message PF PV ;
 
 message: CHARACTER message_suffix 
-		| IDENTIFIER message_suffix { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}
+		| IDENTIFIER message_suffix 
 
 message_suffix: V IDENTIFIER message_suffix 
-{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($2) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $2);
-    }
-}
 				| CHARACTER message_suffix
 				| /* vide */;
 
-Condition: Kw_If PO CND PF Kw_Then inst_list Kw_Else inst_list Kw_EndIf;
 
-CND: var1 COMPARISON var1
-	| exp COMPARISON exp
-	| var1 COMPARISON exp
-	| exp COMPARISON var1 
-	| IDENTIFIER COMPARISON IDENTIFIER
-	{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($3) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3);
-    }
-}
-    | IDENTIFIER COMPARISON var1
-	{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}
-	| IDENTIFIER COMPARISON exp
-	{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}
-	|exp COMPARISON IDENTIFIER
-	{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($3) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3);
-    }
-}
-    |var1 COMPARISON IDENTIFIER
-	{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($3) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3);
-    }
-}
-	|Logical;
-	
-exp: var1 OR var1 
-	|exp OR var1 
-	|IDENTIFIER OR IDENTIFIER 
-	{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($3) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3);
-    }
-}
-	|exp OR IDENTIFIER
-	{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($3) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3);
-    }
-}
-	|var1 AND var1 
-	|exp AND var1
-	|IDENTIFIER AND IDENTIFIER 
-	{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($3) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3);
-    }
-}
-	|exp AND IDENTIFIER
-	{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($3) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $3);
-    }
-}
 
-Boucle: Kw_Dowhile PO CND PF inst_list Kw_EndDo;
 
-Appelf: var1 AFF Kw_CALL IDENTIFIER PO parameter_list PF PV 
-{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($4) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $4);
-    }
-}
-		|IDENTIFIER AFF Kw_CALL IDENTIFIER PO parameter_list PF PV 
-		{ 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-}
 
-Equivalence: Kw_EQUIVALENCE PO parameter_list PF;
+/*************************************** Condition**************************/
+Condition: Kw_If PO CNDs PF Kw_Then inst_list Kw_Else inst_list Kw_EndIf;
+CND: or  CNDs 
+    |and CNDs 
+    |/*vide*/;
+CNDs: var1 COMPARISON var1 CND
+| expression COMPARISON expression CND
+| var1 COMPARISON expression CND
+| expression COMPARISON var1 CND
+| IDENTIFIER COMPARISON IDENTIFIER CND
+| IDENTIFIER COMPARISON var1 CND
+| IDENTIFIER COMPARISON expression CND
+| expression COMPARISON IDENTIFIER CND
+| var1 COMPARISON IDENTIFIER CND
+|Logical
 
-OPERATOR : DIV 
-		  |ADD
-		  |SOUS
-		  |MUL;
 COMPARISON: EQ
 		   |NE
 		   |LT
@@ -354,11 +204,32 @@ COMPARISON: EQ
 		   |GE
 		   |GL;
 
+
+/****************************Boucle********************************************/
+Boucle: Kw_Dowhile PO CNDs PF inst_list Kw_EndDo;
+
+/**********************l'appel************************************************/
+Appelf: var1 AFF Kw_CALL IDENTIFIER PO parameter_list PF PV 
+	   |IDENTIFIER AFF Kw_CALL IDENTIFIER PO parameter_list PF PV 
+
+
+/********************Equivalence*********************************************/
+Equivalence: Kw_EQUIVALENCE PO parameter_list PF;
+
+
+
+
+OPERATOR : DIV 
+		  |ADD
+		  |SOUS
+		  |MUL;
+
 %%
 main () 
 {
     yyparse();
     print();
+	print_quad();
 }
 yywrap(){}
 

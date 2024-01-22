@@ -22,9 +22,6 @@ Real  [-]?{INTEGER}"."([1-9][0-9]*|0)
 CHARACTER \"([^"]*)\"
 Logical   (true|false)
 
-
-
-
 %%
 
 PROGRAM { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Program; }
@@ -95,17 +92,14 @@ DIMENSION  { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_DI
 "(" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return PO;}
 ")" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return PF; }
 "{" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return AO;} 
-
-"}" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return AF; }
-"==" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return EQ ;}
-"!=" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return NE ; } 
-"<" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return LT ; }
-">" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return LE ; }
-"<=" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return GE ;} 
-">=" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return GL ;}
-"OR" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return OR; }
-"AND" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return AND; }
-
+.OR. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return or; }
+.AND. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return and; }
+.EQ. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return EQ ;}
+.NE. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return NE ;} 
+.LT. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return LT ;}
+.LE. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return LE;}
+.GE. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return GE;} 
+.GL. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return GL;}
 "%"[^\n]*\n  /* Commentaire */ 
 [ \t]
 

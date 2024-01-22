@@ -101,8 +101,17 @@ void insertKw(char entity[], char code[]) {
     }
 }
 
-
+//avoir  le type 
+char* get_type(char entity[]) {
+    int pos = search(entity, 0);
+    if (pos != -1) {
+        return headIdfCst[pos].type;
+    }
+    // Retourner une chaîne vide si l'identificateur n'est pas trouvé
+    return "";
+}
 // Fonction pour afficher la liste chaînée des identificateurs et constantes
+
 void printIdfCstList() {
     printf("\n/******************Table des symboles IDF*******************");
     printf("\n-------------------------------------------------------------\n");
@@ -154,15 +163,6 @@ void print() {
     printKwList();
     // Ajoutez d'autres fonctions similaires pour les listes chaînées manquantes si nécessaire.
 }
-
-// Fonction pour insérer le type dans la liste chaînée des identificateurs et constantes
-void insert_type(char entity[], char type[]) {
-    int pos = search(entity, 0);
-    if (pos != -1) {
-        strcpy(headIdfCst[pos].type, type);
-    }
-}
-
 // Fonction pour vérifier la déclaration dans la liste chaînée des identificateurs et constantes
 int check_declaration(char entity[]) {
     int pos = search(entity, 0);
