@@ -82,7 +82,7 @@ int nb_line = 1 , col = 1 ;
 char* current_variable_name = NULL;
 char tmp[20],tmp2[20],tmp3[20],type[20],tmp4[20],tmp6[20],tmp7[20];
 char* f; 
-char buffer[200] ;
+char buffer[20];
 char save_type[20];
 int t=0;
 
@@ -528,10 +528,10 @@ static const yytype_uint8 yyrline[] =
       86,    89,    90,    91,    92,    93,    94,    95,    98,    99,
      100,   101,   102,   103,   104,   110,   111,   112,   113,   114,
      116,   117,   118,   120,   124,   138,   139,   141,   142,   143,
-     147,   153,   162,   171,   173,   174,   181,   187,   188,   195,
-     196,   197,   198,   199,   200,   201,   202,   203,   204,   205,
-     206,   207,   208,   210,   211,   212,   213,   214,   215,   219,
-     222,   229,   237,   239,   240,   241,   242
+     145,   151,   160,   169,   171,   172,   174,   175,   176,   183,
+     184,   185,   186,   187,   188,   189,   190,   191,   192,   193,
+     194,   195,   196,   198,   199,   200,   201,   202,   203,   207,
+     210,   211,   215,   220,   221,   222,   223
 };
 #endif
 
@@ -1654,10 +1654,31 @@ yyreduce:
 ;}
     break;
 
+  case 47:
+
+/* Line 1455 of yacc.c  */
+#line 141 "bisony.y"
+    { sprintf(buffer, "%d", (yyvsp[(1) - (1)].INTEGER));printf(buffer) ;}
+    break;
+
+  case 48:
+
+/* Line 1455 of yacc.c  */
+#line 142 "bisony.y"
+    { sprintf(buffer,"%s",(yyvsp[(1) - (1)].strVal));printf(buffer);}
+    break;
+
+  case 49:
+
+/* Line 1455 of yacc.c  */
+#line 143 "bisony.y"
+    { sprintf(buffer, "%f", (yyvsp[(1) - (1)].Real));printf(buffer) ;}
+    break;
+
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 147 "bisony.y"
+#line 145 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (6)].strVal)) == 0) {
@@ -1669,7 +1690,7 @@ yyreduce:
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 153 "bisony.y"
+#line 151 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {
@@ -1681,7 +1702,7 @@ yyreduce:
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 162 "bisony.y"
+#line 160 "bisony.y"
     { 
     // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration((yyvsp[(3) - (5)].strVal)) == 0) {
@@ -1690,58 +1711,10 @@ yyreduce:
 ;}
     break;
 
-  case 55:
-
-/* Line 1455 of yacc.c  */
-#line 174 "bisony.y"
-    { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration((yyvsp[(1) - (2)].strVal)) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", (yyvsp[(1) - (2)].strVal));
-    }
-;}
-    break;
-
-  case 56:
-
-/* Line 1455 of yacc.c  */
-#line 181 "bisony.y"
-    { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration((yyvsp[(2) - (3)].strVal)) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", (yyvsp[(2) - (3)].strVal));
-    }
-;}
-    break;
-
-  case 80:
-
-/* Line 1455 of yacc.c  */
-#line 223 "bisony.y"
-    { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration((yyvsp[(4) - (8)].strVal)) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", (yyvsp[(4) - (8)].strVal));
-    }
-;}
-    break;
-
-  case 81:
-
-/* Line 1455 of yacc.c  */
-#line 230 "bisony.y"
-    { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration((yyvsp[(1) - (8)].strVal)) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", (yyvsp[(1) - (8)].strVal));
-    }
-;}
-    break;
-
 
 
 /* Line 1455 of yacc.c  */
-#line 1745 "bisony.tab.c"
+#line 1718 "bisony.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1953,7 +1926,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 244 "bisony.y"
+#line 225 "bisony.y"
 
 main () 
 {

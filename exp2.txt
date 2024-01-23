@@ -1,0 +1,19 @@
+INTEGER Routine fun (var1)
+INTEGER a, b ;  
+a=var1; 
+If(a .EQ. var1 .OR. a .GL. var1)Then 
+a=b;
+WRITE("test",n); 
+Else a=b; EndIf
+fun=a;
+ENDR
+
+PROGRAM
+prog
+INTEGER i ;
+i=2;
+%test test 
+READ(b);
+DoWhile (true) WRITE("test",n); EndDo
+WRITE("test",n); 
+END

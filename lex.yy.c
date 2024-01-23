@@ -660,11 +660,10 @@ extern int nb_line;
 extern int col;
 extern YYSTYPE yylval;
 extern char save_type[20];
+extern char buffer[20];
 
-extern char buffer[200];
 
-
-#line 668 "lex.yy.c"
+#line 667 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -815,10 +814,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 25 "lexo.l"
+#line 24 "lexo.l"
 
 
-#line 822 "lex.yy.c"
+#line 821 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -903,123 +902,124 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 27 "lexo.l"
+#line 26 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Program; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 28 "lexo.l"
+#line 27 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Begin;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 29 "lexo.l"
+#line 28 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_End;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 30 "lexo.l"
+#line 29 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Routine;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 31 "lexo.l"
+#line 30 "lexo.l"
 {insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_ENDR;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 32 "lexo.l"
+#line 31 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_Integer;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 33 "lexo.l"
+#line 32 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_Real;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 34 "lexo.l"
+#line 33 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_Logical;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 35 "lexo.l"
+#line 34 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Character;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 36 "lexo.l"
+#line 35 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_If; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 38 "lexo.l"
+#line 37 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Then;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 39 "lexo.l"
+#line 38 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_Else;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 40 "lexo.l"
+#line 39 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_Dowhile;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 41 "lexo.l"
+#line 40 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext); return Kw_For;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 42 "lexo.l"
+#line 41 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_EndIf;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 43 "lexo.l"
+#line 42 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_EndDo;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 44 "lexo.l"
+#line 43 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_READ; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 45 "lexo.l"
+#line 44 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_WRITE ;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 46 "lexo.l"
+#line 45 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_CALL; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 47 "lexo.l"
+#line 46 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_EQUIVALENCE ; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 48 "lexo.l"
+#line 47 "lexo.l"
 { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_DIMENSION ;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 50 "lexo.l"
+#line 49 "lexo.l"
 return Logical;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 52 "lexo.l"
+#line 51 "lexo.l"
 {
     // Vérifier la longueur de l'identificateur
     if (yyleng > 10) {
         printf("L'identificateur %s dans la ligne %d est trop grand !\n", yytext, nb_line);
     } else {
         // Insérer l'identificateur dans la table des identificateurs
+        
          insertIdfCst(yytext, "idf", save_type, buffer);
         yylval.strVal = strdup(yytext);
         return IDENTIFIER;

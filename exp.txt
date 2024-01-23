@@ -2,20 +2,20 @@ INTEGER Routine fun (var1)
 INTEGER a, b ;  
 a=var1; 
 If(a .EQ. var1 .OR. a .GL. var1)Then var1=5; Else var1=a;EndIf
-fun=3;
+fun=a;
 ENDR
 INTEGER Routine xxx ( var2)
 INTEGER c ;  
-c=3.5;
+c=4;
 If (c .LT. var2)Then var2=c; Else var2=c;EndIf
 fun=a;
 ENDR
 PROGRAM
 prog
 REAL A DIMENSION (1,2);
-INTEGER a; 
+INTEGER a ,n; 
 Logical b; 
-n=2;
+n=1;
 %test test 
 READ(b);
 DoWhile (true) WRITE("test",n); EndDo

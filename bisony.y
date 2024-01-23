@@ -11,7 +11,7 @@ int nb_line = 1 , col = 1 ;
 char* current_variable_name = NULL;
 char tmp[20],tmp2[20],tmp3[20],type[20],tmp4[20],tmp6[20],tmp7[20];
 char* f; 
-char buffer[200] ;
+char buffer[20];
 char save_type[20];
 int t=0;
 
@@ -83,7 +83,7 @@ declaration_2: V var declaration_2
 /******************************Main programme ***********************************************/
 main_program: Kw_Program IDENTIFIER  declarations inst_list Kw_End {strcpy(save_type,"CHARACTER");};
 inst_list: instruction
-           | inst_list  instruction ;
+           | inst_list instruction ;
 
 
 instruction: affectation
@@ -138,11 +138,9 @@ tab: IDENTIFIER Kw_DIMENSION PO INTEGER PF {
 var1: mat1 
 	 |tab1;
 	
-Const : INTEGER   // { sprintf(buffer, "%d", $1); printf(buffer) }
-      | CHARACTER  //{ strcpy(buffer,$1); printf(buffer) }
-      | Real     // { sprintf(buffer, "%f", $1);printf(buffer) } 
-
-
+Const : INTEGER { sprintf(buffer, "%d", $1);printf(buffer) } 
+      | CHARACTER  { sprintf(buffer,"%s",$1);printf(buffer)}
+      | Real { sprintf(buffer, "%f", $1);printf(buffer) } 
 		
 mat1: IDENTIFIER  PO INTEGER V INTEGER PF { 
     // Vérifier la déclaration dans la table des identificateurs

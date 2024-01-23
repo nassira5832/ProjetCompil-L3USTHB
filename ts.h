@@ -7,9 +7,10 @@ typedef struct ElementIdfCst {
     char name[20];
     char code[20];
     char type[20];
-    char value[20];
+    int value; 
     struct ElementIdfCst* next;
 } ElementIdfCst;
+
 
 typedef struct ElementSepKw {
     char name[20];
@@ -65,6 +66,9 @@ int search(char entity[], int t) {
         }
     }
 }
+void copyIntegerValue(int value, int a) {
+    a = value;
+}
 
 // Fonction d'insertion dans la liste chaînée des identificateurs et constantes
 void insertIdfCst(char entity[], char code[], char type[], char value[]) {
@@ -73,11 +77,16 @@ void insertIdfCst(char entity[], char code[], char type[], char value[]) {
         strcpy(newElement->name, entity);
         strcpy(newElement->code, code);
         strcpy(newElement->type, type);
-        strcpy(newElement->value, value);
+
+        // Utiliser atoi pour convertir la chaîne de caractères en entier
+        newElement->value = atoi(value);
+
         newElement->next = headIdfCst;
         headIdfCst = newElement;
     }
 }
+
+
 
 // Fonction d'insertion dans la liste chaînée des séparateurs et mots-clés
 void insertSepKw(char entity[], char code[]) {
