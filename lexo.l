@@ -83,23 +83,24 @@ DIMENSION  { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_DI
 
 
 ";" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return PV;}
-"=" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return AFF;}
-"," { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return V ;}
-"+" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return ADD ;}
-"-" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return SOUS;}
-"*" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return MUL;}
-"/" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return DIV;}
+"," { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return V;}
+"=" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return AFF ;}
+"+" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return OPERATOR;}
+"-" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return OPERATOR;}
+"*" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return OPERATOR;}
+"/" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return OPERATOR;}
 "(" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return PO;}
 ")" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return PF; }
-"{" { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext);return AO;} 
+
 .OR. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return or; }
 .AND. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return and; }
-.EQ. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return EQ ;}
-.NE. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return NE ;} 
-.LT. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return LT ;}
-.LE. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return LE;}
-.GE. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return GE;} 
-.GL. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return GL;}
+.EQ. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return COMPARISON ;}
+.NE. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return COMPARISON ;} 
+.LT. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return COMPARISON ;}
+.LE. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return COMPARISON;}
+.GE. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return COMPARISON;} 
+.GL. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return COMPARISON;}
+
 "%"[^\n]*\n  /* Commentaire */ 
 [ \t]
 

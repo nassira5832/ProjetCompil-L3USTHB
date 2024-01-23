@@ -176,6 +176,6 @@ void print() {
 int check_declaration(char entity[]) {
     int pos = search(entity, 0);
     if (pos != -1 && strcmp(headIdfCst[pos].type, "") == 0)
-        return 0;
-    return -1;
+        return 1;  // L'entité est déclarée
+    return 0;      // L'entité n'est pas déclarée
 }

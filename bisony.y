@@ -32,13 +32,13 @@ int t=0;
 %token <strVal> IDENTIFIER
 %token <INTEGER> INTEGER
 %token  <Real> Real
-%token <Logical> Logical <strVal> CHARACTER 
+%token <Logical> Logical <strVal> CHARACTER <strVal>OPERATOR <strVal>COMPARISON
 %token Kw_Program Kw_Begin Kw_End Kw_Routine Kw_ENDR Kw_Integer Kw_Real Kw_Logical Kw_Character 
 %token Kw_If Kw_Then Kw_Else Kw_Dowhile Kw_For Kw_EndDo Kw_READ Kw_WRITE Kw_CALL Kw_EQUIVALENCE Kw_DIMENSION 
-%token  PO PF AO AF V PV AFF   ADD DIV MUL SOUS  
+%token  PO PF AO AF V PV AFF   
 %token Kw_EndIf 
 %token  or and
-%token EQ NE LT LE GE GL 
+ 
 
 
 %start S
@@ -96,11 +96,15 @@ instruction: affectation
 
 ///////////affecation////////////////////////
 affectation: var1 AFF expression PV 
-             |IDENTIFIER AFF expression PV 
-			 |var1 AFF Const PV         
-			 |IDENTIFIER AFF Const PV 
+             |IDENTIFIER AFF expression PV {if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  if(strcmp(get_type($1),"Real")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",$1);t++;}}}
+             |var1 AFF INTEGER PV     { sprintf(buffer, "%d", $3);printf(buffer) }     
+			 |IDENTIFIER AFF INTEGER PV { sprintf(buffer, "%d", $3);printf(buffer); if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  if(strcmp(get_type($1),"Real")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",$1);t++;}}} 
+             |var1 AFF Real PV { sprintf(buffer, "%f", $3);printf(buffer); } 
+             |IDENTIFIER AFF Real PV { sprintf(buffer, "%f", $3);printf(buffer); if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  if(strcmp(get_type($1),"Real")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",""," ",$1);t++;}}} 
+             |var1 AFF CHARACTER PV {strcpy(buffer,$3);  }
+             |IDENTIFIER AFF CHARACTER PV{strcpy(buffer,$3); if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  if(strcmp(get_type($1),"Real")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",""," ",$1);t++;}}}
              |var1 AFF var1 PV 
-			 |IDENTIFIER AFF IDENTIFIER PV
+			 |IDENTIFIER AFF IDENTIFIER PV{ if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {if (check_declaration($3) == 0) {printf("Erreur : identificateur %s non declarer. \n", $3); } else {if(strcmp(get_type($1),get_type($3))==0) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",$3," ",$1);t++;}}}}
              |IDENTIFIER AFF var1 PV
               
 			 
@@ -111,25 +115,18 @@ expression: var1 OPERATOR var1
 			|IDENTIFIER OPERATOR IDENTIFIER 
             |Logical
 			|var1 OPERATOR IDENTIFIER
-			|IDENTIFIER OPERATOR var1 
-			 
+			|IDENTIFIER OPERATOR var1
+
+			
 var: IDENTIFIER 
      | mat 
 	 | tab ;
 
-mat: IDENTIFIER  Kw_DIMENSION PO INTEGER V INTEGER PF { 
-    
-			{ if($4<=0 || $6<=0) printf("File \"%s\" , line %d , CHARACTER %d :semantic error ( La taille de tableau ne doit pas etre inferieur ou égale à null ) \n",f,nb_line,col);}}
+mat: IDENTIFIER  Kw_DIMENSION PO INTEGER V INTEGER PF { if($4<=0 || $6<=0) printf("File \"%s\" , line %d , CHARACTER %d :semantic error ( La taille de tableau ne doit pas etre inferieur ou égale à null ) \n",f,nb_line,col);}
 			
-tab: IDENTIFIER Kw_DIMENSION PO INTEGER PF { 
-    // Vérifier la déclaration dans la table des identificateurs
-    if (check_declaration($1) == 0) {
-        printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
-    }
-			{ if($4<=0) printf("File \"%s\" , line %d , CHARACTER %d :semantic error ( La taille de tableau ne doit pas etre inferieur ou égale à null ) \n",f,nb_line,col);}
-
-}
-            
+tab: IDENTIFIER Kw_DIMENSION PO INTEGER PF  { if($4<=0) printf("File \"%s\" , line %d , CHARACTER %d :semantic error ( La taille de tableau ne doit pas etre inferieur ou égale à null ) \n",f,nb_line,col);}
+    
+   
                
         
 
@@ -138,18 +135,14 @@ tab: IDENTIFIER Kw_DIMENSION PO INTEGER PF {
 var1: mat1 
 	 |tab1;
 	
-Const : INTEGER { sprintf(buffer, "%d", $1);printf(buffer) } 
-      | CHARACTER  { sprintf(buffer,"%s",$1);printf(buffer)}
-      | Real { sprintf(buffer, "%f", $1);printf(buffer) } 
 		
 mat1: IDENTIFIER  PO INTEGER V INTEGER PF { 
-    // Vérifier la déclaration dans la table des identificateurs
     if (check_declaration($1) == 0) {
         printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
     }
 }
 tab1: IDENTIFIER  PO INTEGER PF { 
-    // Vérifier la déclaration dans la table des identificateurs
+    
     if (check_declaration($1) == 0) {
         printf("Erreur : L'identificateur %s n'a pas été déclaré.\n", $1);
     }
@@ -195,12 +188,7 @@ CNDs: var1 COMPARISON var1 CND
 | var1 COMPARISON IDENTIFIER CND
 |Logical
 
-COMPARISON: EQ
-		   |NE
-		   |LT
-		   |LE
-		   |GE
-		   |GL;
+
 
 
 /****************************Boucle********************************************/
@@ -216,11 +204,6 @@ Equivalence: Kw_EQUIVALENCE PO parameter_list PF;
 
 
 
-
-OPERATOR : DIV 
-		  |ADD
-		  |SOUS
-		  |MUL;
 
 %%
 main () 

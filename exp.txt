@@ -18,6 +18,6 @@ Logical b;
 n=1;
 %test test 
 READ(b);
-DoWhile (true) WRITE("test",n); EndDo
-WRITE("test",n); 
+DoWhile (true) WRITE("test",b); EndDo
+WRITE("test",b); 
 END
