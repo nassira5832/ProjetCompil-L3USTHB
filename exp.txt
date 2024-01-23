@@ -1,7 +1,7 @@
 INTEGER Routine fun (var1)
 INTEGER a, b ;  
-a=var1; 
-If(a .EQ. var1 .OR. a .GL. var1)Then var1=5; Else var1=a;EndIf
+b=var1; 
+If(a .EQ. var1 .OR. a .GL. var1)Then var1=5; Else b=a;EndIf
 fun=a;
 ENDR
 INTEGER Routine xxx ( var2)

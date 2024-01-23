@@ -6,8 +6,7 @@
 typedef struct ElementIdfCst {
     char name[20];
     char code[20];
-    char type[20];
-    int value; 
+    char type[20]; 
     struct ElementIdfCst* next;
 } ElementIdfCst;
 
@@ -71,16 +70,12 @@ void copyIntegerValue(int value, int a) {
 }
 
 // Fonction d'insertion dans la liste chaînée des identificateurs et constantes
-void insertIdfCst(char entity[], char code[], char type[], char value[]) {
+void insertIdfCst(char entity[], char code[], char type[]) {
     if (search(entity, 0) == -1) {
         ElementIdfCst* newElement = (ElementIdfCst*)malloc(sizeof(ElementIdfCst));
         strcpy(newElement->name, entity);
         strcpy(newElement->code, code);
         strcpy(newElement->type, type);
-
-        // Utiliser atoi pour convertir la chaîne de caractères en entier
-        newElement->value = atoi(value);
-
         newElement->next = headIdfCst;
         headIdfCst = newElement;
     }
@@ -124,13 +119,13 @@ char* get_type(char entity[]) {
 void printIdfCstList() {
     printf("\n/******************Table des symboles IDF*******************");
     printf("\n-------------------------------------------------------------\n");
-    printf("\t|    Name   |      Code    |   Type    |    Value   | \n");
-    printf("-------------------------------------------------------------\n");
+    printf("\t|    Name   |      Code    |   Type  | \n");
+    printf("-------------------------------------------\n");
 
     ElementIdfCst* current = headIdfCst;
 
     while (current != NULL) {
-        printf("\t|%10s | %12s |%10s | %10d |\n", current->name, current->code, current->type, current->value);
+        printf("\t|%10s | %12s |%10s|\n", current->name, current->code, current->type);
         current = current->next;
     }
 }
@@ -175,7 +170,7 @@ void print() {
 // Fonction pour vérifier la déclaration dans la liste chaînée des identificateurs et constantes
 int check_declaration(char entity[]) {
     int pos = search(entity, 0);
-    if (pos != -1 && strcmp(headIdfCst[pos].type, "") == 0)
+    if (pos != -1 && strcmp(headIdfCst[pos].type, "") != 0)
         return 1;  // L'entité est déclarée
     return 0;      // L'entité n'est pas déclarée
 }

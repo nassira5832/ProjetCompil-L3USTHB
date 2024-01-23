@@ -602,7 +602,7 @@ extern int nb_line;
 extern int col;
 extern YYSTYPE yylval;
 extern char save_type[20];
-extern char buffer[20];
+
 
 
 #line 609 "lex.yy.c"
@@ -962,7 +962,7 @@ YY_RULE_SETUP
     } else {
         // Insérer l'identificateur dans la table des identificateurs
         
-         insertIdfCst(yytext, "idf", save_type, buffer);
+         insertIdfCst(yytext, "idf", save_type);
         yylval.strVal = strdup(yytext);
         return IDENTIFIER;
     }

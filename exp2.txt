@@ -7,13 +7,13 @@ WRITE("test",a);
 Else a=3; EndIf
 fun=a;
 ENDR
-
 PROGRAM
 prog
 REAL T DIMENSION (2);
-INTEGER i ;
+INTEGER i,j ;
 T(1)=5.2;
-i=2;
+j=5;
+i=2+j;
 %test test 
 READ(i);
 DoWhile (true) WRITE("test",i); EndDo

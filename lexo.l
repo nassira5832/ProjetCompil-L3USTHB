@@ -10,7 +10,7 @@ extern int nb_line;
 extern int col;
 extern YYSTYPE yylval;
 extern char save_type[20];
-extern char buffer[20];
+
 
 
 %}
@@ -55,7 +55,7 @@ DIMENSION  { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_DI
     } else {
         // Insérer l'identificateur dans la table des identificateurs
         
-         insertIdfCst(yytext, "idf", save_type, buffer);
+         insertIdfCst(yytext, "idf", save_type);
         yylval.strVal = strdup(yytext);
         return IDENTIFIER;
     }
