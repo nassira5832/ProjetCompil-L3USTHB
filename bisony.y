@@ -9,13 +9,13 @@ int qc =0 ;
 int yywrap(void);
 int nb_line = 1 , col = 1 ; 
 char* current_variable_name = NULL;
-char tmp[20],tmp2[20],tmp3[20],type[20],tmp4[20],tmp6[20],tmp7[20],tmp8[20], type[20];
+char tmp[20],tmp2[20],tmp3[20],tmp5[20],tmp4[20],tmp6[20],tmp7[20],tmp8[20],tmp9[20], type[20];
 char* f; 
 char buffer[20];
 char save_type[20];
 int t=0;
 char Tailledeux[20], Tailletab[20], Tailleun[20]; 
-
+int sauv_cond=0,sauv_inst=0,sauv_fin,sauv_else;
 
 %}
 
@@ -128,7 +128,7 @@ affectation: var1 AFF expression PV  { if(!(strcmp(type,"INTEGER")==0) && !(strc
 			 |IDENTIFIER AFF INTEGER PV { sprintf(buffer, "%d", $3);printf(buffer); if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  if(strcmp(get_type($1),"Real")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",$1);t++;}}} 
              |var1 AFF Real PV  { sprintf(buffer, "%f", $3);printf(buffer); if(!(strcmp(type,"Real")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",tmp8);t++;}}  
              |IDENTIFIER AFF Real PV { sprintf(buffer, "%f", $3);printf(buffer); if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  if(strcmp(get_type($1),"Real")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",$1);t++;}}} 
-             |var1 AFF var1 PV {  quadr(":=",tmp8," ",tmp8);t++;}
+             |var1 AFF var1 PV { quadr(":=",tmp8," ",tmp8);t++;}
 			 |IDENTIFIER AFF IDENTIFIER PV{ if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {if (check_declaration($3) == 0) {printf("Erreur : identificateur %s non declarer. \n", $3); } else {if(strcmp(get_type($1),get_type($3))==0) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",$3," ",$1);t++;}}}}
              |IDENTIFIER AFF var1 PV { if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  if(strcmp(get_type($1),type)!=0 ) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",tmp8," ",$1);t++;}}} 
              |var1 AFF CHARACTER PV  { sprintf(buffer, "%s", $3); if(!(strcmp(type,"CHARACTER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",tmp8);t++;}}  
@@ -185,7 +185,11 @@ message_suffix: V IDENTIFIER message_suffix
 
 
 /*************************************** Condition**************************/
-Condition: Kw_If PO CNDs PF Kw_Then inst_list Kw_Else inst_list Kw_EndIf;
+Condition:  B Kw_Else inst_list Kw_EndIf {  sprintf(tmp,"%d",t);  
+                              update_quad(sauv_fin,1,tmp);};
+B: A inst_list {quadr("BR"," "," "," "); sauv_fin=t;t++;sprintf(tmp4,"quadr N %d",t);update_quad(sauv_cond,1,tmp4);}
+A:Kw_If PO CNDs PF Kw_Then{sauv_cond=t;quadr("BR"," ","  "," ");t++;sauv_inst=t;}
+
 CND: or  CNDs 
     |and CNDs 
     |/*vide*/;
@@ -194,14 +198,21 @@ CNDs: var1 COMPARISON var1 CND
 | var1 COMPARISON expression CND
 | expression COMPARISON var1 CND
 | IDENTIFIER COMPARISON IDENTIFIER CND
+|IDENTIFIER COMPARISON INTEGER CND
+{sprintf(tmp9,"quadr N %d",sauv_inst);sprintf(tmp,"%d",$3);
+if (strcmp($2,".EQ.")==0) strcpy(tmp5,"BE");
+if (strcmp($2,".LT.")==0) strcpy(tmp5,"BL");
+if (strcmp($2,".GT.")==0) strcpy(tmp5,"BG");
+if (strcmp($2,".LE.")==0) strcpy(tmp5,"BLE");
+if (strcmp($2,".GE.")==0) strcpy(tmp5,"BGE");
+if (strcmp($2,".NE.")==0) strcpy(tmp5,"BNE");
+ quadr(tmp5,tmp9,$1,tmp);t++;sprintf(tmp5,"quadr N %d",t);update_quad(sauv_fin,1,tmp5);}
+
 | IDENTIFIER COMPARISON var1 CND
 | IDENTIFIER COMPARISON expression CND
 | expression COMPARISON IDENTIFIER CND
 | var1 COMPARISON IDENTIFIER CND
 |Logical
-
-
-
 
 /****************************Boucle********************************************/
 Boucle: Kw_Dowhile PO CNDs PF inst_list Kw_EndDo;

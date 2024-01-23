@@ -99,7 +99,7 @@ DIMENSION  { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_DI
 .LT. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return COMPARISON ;}
 .LE. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return COMPARISON;}
 .GE. { insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return COMPARISON;} 
-.GL. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return COMPARISON;}
+.GT. {insertSepKw(yytext, "Sep"); yylval.strVal = strdup(yytext); return COMPARISON;}
 
 "%"[^\n]*\n  /* Commentaire */ 
 [ \t]
