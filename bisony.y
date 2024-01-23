@@ -15,7 +15,7 @@ char buffer[20];
 char save_type[20];
 int t=0;
 char Tailledeux[20], Tailletab[20], Tailleun[20]; 
-int sauv_cond=0,sauv_inst=0,sauv_fin,sauv_else;
+int end_if=0, begin_else=0;
 
 %}
 
@@ -185,10 +185,13 @@ message_suffix: V IDENTIFIER message_suffix
 
 
 /*************************************** Condition**************************/
-Condition:  B Kw_Else inst_list Kw_EndIf {  sprintf(tmp,"%d",t);  
-                              update_quad(sauv_fin,1,tmp);};
-B: A inst_list {quadr("BR"," "," "," "); sauv_fin=t;t++;sprintf(tmp4,"quadr N %d",t);update_quad(sauv_cond,1,tmp4);}
-A:Kw_If PO CNDs PF Kw_Then{sauv_cond=t;quadr("BR"," ","  "," ");t++;sauv_inst=t;}
+Condition:  B Kw_Else inst_list Kw_EndIf {  sprintf(tmp,"%d",t+1);  
+                              update_quad(end_if,1,tmp); };
+B: A inst_list { end_if=t;
+                   quadr("BR", "","empty", "empty"); 
+				   sprintf(tmp,"%d",t+1);
+                   update_quad(begin_else,1,tmp);}
+A:Kw_If PO CNDs PF Kw_Then
 
 CND: or  CNDs 
     |and CNDs 
@@ -199,15 +202,15 @@ CNDs: var1 COMPARISON var1 CND
 | expression COMPARISON var1 CND
 | IDENTIFIER COMPARISON IDENTIFIER CND
 |IDENTIFIER COMPARISON INTEGER CND
-{sprintf(tmp9,"quadr N %d",sauv_inst);sprintf(tmp,"%d",$3);
-if (strcmp($2,".EQ.")==0) strcpy(tmp5,"BE");
-if (strcmp($2,".LT.")==0) strcpy(tmp5,"BL");
-if (strcmp($2,".GT.")==0) strcpy(tmp5,"BG");
-if (strcmp($2,".LE.")==0) strcpy(tmp5,"BLE");
-if (strcmp($2,".GE.")==0) strcpy(tmp5,"BGE");
-if (strcmp($2,".NE.")==0) strcpy(tmp5,"BNE");
- quadr(tmp5,tmp9,$1,tmp);t++;sprintf(tmp5,"quadr N %d",t);update_quad(sauv_fin,1,tmp5);}
-
+{sprintf(tmp,"%d",$3);begin_else=t;
+if (strcmp($2,".EQ.")==0) strcpy(tmp5,"BNE");
+if (strcmp($2,".LT.")==0) strcpy(tmp5,"BGE");
+if (strcmp($2,".GT.")==0) strcpy(tmp5,"BLE");
+if (strcmp($2,".LE.")==0) strcpy(tmp5,"BG");
+if (strcmp($2,".GE.")==0) strcpy(tmp5,"BL");
+if (strcmp($2,".NE.")==0) strcpy(tmp5,"BE");
+ sprintf(tmp9,"%d",end_if);
+ quadr(tmp5,"",$1,tmp);t++;}
 | IDENTIFIER COMPARISON var1 CND
 | IDENTIFIER COMPARISON expression CND
 | expression COMPARISON IDENTIFIER CND

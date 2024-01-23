@@ -1,13 +1,12 @@
 INTEGER Routine fun (var1)
 INTEGER a, b ;  
 b=var1; 
-If(a .EQ. var1 .OR. a .GL. var1)Then var1=5; Else b=a;EndIf
 fun=a;
 ENDR
 INTEGER Routine xxx ( var2)
 INTEGER c ;  
 c=4;
-If (c .LT. var2)Then var2=c; Else var2=c;EndIf
+If (c .LT. 2)Then c=2 ; Else c=3;EndIf
 fun=a;
 ENDR
 PROGRAM

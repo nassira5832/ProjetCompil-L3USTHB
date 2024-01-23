@@ -86,7 +86,7 @@ char buffer[20];
 char save_type[20];
 int t=0;
 char Tailledeux[20], Tailletab[20], Tailleun[20]; 
-int sauv_cond=0,sauv_inst=0,sauv_fin,sauv_else;
+int end_if=0, begin_else=0;
 
 
 
@@ -521,9 +521,9 @@ static const yytype_uint8 yyrline[] =
      115,   116,   117,   125,   126,   127,   128,   129,   130,   131,
      132,   133,   134,   135,   138,   139,   141,   143,   145,   147,
      147,   147,   147,   155,   156,   163,   174,   176,   177,   179,
-     180,   181,   188,   190,   191,   193,   194,   195,   196,   197,
-     198,   199,   200,   201,   211,   212,   213,   214,   215,   218,
-     224,   225,   233
+     180,   181,   188,   190,   194,   196,   197,   198,   199,   200,
+     201,   202,   203,   204,   214,   215,   216,   217,   218,   221,
+     227,   228,   236
 };
 #endif
 
@@ -1796,42 +1796,39 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 188 "bisony.y"
-    {  sprintf(tmp,"%d",t);  
-                              update_quad(sauv_fin,1,tmp);;}
+    {  sprintf(tmp,"%d",t+1);  
+                              update_quad(end_if,1,tmp); ;}
     break;
 
   case 63:
 
 /* Line 1455 of yacc.c  */
 #line 190 "bisony.y"
-    {quadr("BR"," "," "," "); sauv_fin=t;t++;sprintf(tmp4,"quadr N %d",t);update_quad(sauv_cond,1,tmp4);;}
-    break;
-
-  case 64:
-
-/* Line 1455 of yacc.c  */
-#line 191 "bisony.y"
-    {sauv_cond=t;quadr("BR"," ","  "," ");t++;sauv_inst=t;;}
+    { end_if=t;
+                   quadr("BR", "","empty", "empty"); 
+				   sprintf(tmp,"%d",t+1);
+                   update_quad(begin_else,1,tmp);;}
     break;
 
   case 73:
 
 /* Line 1455 of yacc.c  */
-#line 202 "bisony.y"
-    {sprintf(tmp9,"quadr N %d",sauv_inst);sprintf(tmp,"%d",(yyvsp[(3) - (4)].INTEGER));
-if (strcmp((yyvsp[(2) - (4)].strVal),".EQ.")==0) strcpy(tmp5,"BE");
-if (strcmp((yyvsp[(2) - (4)].strVal),".LT.")==0) strcpy(tmp5,"BL");
-if (strcmp((yyvsp[(2) - (4)].strVal),".GT.")==0) strcpy(tmp5,"BG");
-if (strcmp((yyvsp[(2) - (4)].strVal),".LE.")==0) strcpy(tmp5,"BLE");
-if (strcmp((yyvsp[(2) - (4)].strVal),".GE.")==0) strcpy(tmp5,"BGE");
-if (strcmp((yyvsp[(2) - (4)].strVal),".NE.")==0) strcpy(tmp5,"BNE");
- quadr(tmp5,tmp9,(yyvsp[(1) - (4)].strVal),tmp);t++;sprintf(tmp5,"quadr N %d",t);update_quad(sauv_fin,1,tmp5);;}
+#line 205 "bisony.y"
+    {sprintf(tmp,"%d",(yyvsp[(3) - (4)].INTEGER));begin_else=t;
+if (strcmp((yyvsp[(2) - (4)].strVal),".EQ.")==0) strcpy(tmp5,"BNE");
+if (strcmp((yyvsp[(2) - (4)].strVal),".LT.")==0) strcpy(tmp5,"BGE");
+if (strcmp((yyvsp[(2) - (4)].strVal),".GT.")==0) strcpy(tmp5,"BLE");
+if (strcmp((yyvsp[(2) - (4)].strVal),".LE.")==0) strcpy(tmp5,"BG");
+if (strcmp((yyvsp[(2) - (4)].strVal),".GE.")==0) strcpy(tmp5,"BL");
+if (strcmp((yyvsp[(2) - (4)].strVal),".NE.")==0) strcpy(tmp5,"BE");
+ sprintf(tmp9,"%d",end_if);
+ quadr(tmp5,"",(yyvsp[(1) - (4)].strVal),tmp);t++;;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1835 "bisony.tab.c"
+#line 1832 "bisony.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2043,7 +2040,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 238 "bisony.y"
+#line 241 "bisony.y"
 
 main () 
 {

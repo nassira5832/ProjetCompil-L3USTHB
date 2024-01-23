@@ -1,19 +1,11 @@
 INTEGER Routine fun (var1)
 INTEGER a;  
-a=var1; 
+a=2; 
 fun=a;
 ENDR
+
 PROGRAM
 prog
-INTEGER T DIMENSION (2);
 INTEGER j , i  ;
-T(1)=7;
-j=22;
-i=22;
-If (i.EQ.2) Then i=4; Else i=2; EndIf
-%test test 
-t(0)=8;
-READ(i);
-DoWhile (true) WRITE("test",i); EndDo
-WRITE("test",i); 
+If (i.EQ.2) Then i=4; i=5; i=3; Else i=2; i=6;EndIf
 END 
