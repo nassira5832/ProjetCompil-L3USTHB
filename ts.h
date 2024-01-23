@@ -111,7 +111,6 @@ char* get_type(char entity[]) {
     if (pos != -1) {
         return headIdfCst[pos].type;
     }
-    // Retourner une chaîne vide si l'identificateur n'est pas trouvé
     return "";
 }
 // Fonction pour afficher la liste chaînée des identificateurs et constantes

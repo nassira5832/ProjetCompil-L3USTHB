@@ -9,10 +9,10 @@ fun=a;
 ENDR
 PROGRAM
 prog
-REAL T DIMENSION (2);
-INTEGER i,j ;
-T(1)=5.2;
-j=5;
+INTEGER T DIMENSION (2);
+REAL j , i  ;
+T(1)=7;
+j=5.2;
 i=2+j;
 %test test 
 READ(i);
