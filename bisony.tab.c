@@ -1770,14 +1770,14 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 155 "bisony.y"
-    { if (check_declaration((yyvsp[(1) - (4)].strVal)) != 0) { printf("Erreur : L'identificateur %s non declaree.\n", (yyvsp[(1) - (4)].strVal));}else {if ((yyvsp[(3) - (4)].INTEGER)>=atoi(Tailletab)){printf("Dépassement de la taille du tableau %s",(yyvsp[(1) - (4)].strVal));} else {strcpy(type,get_type((yyvsp[(1) - (4)].strVal))),sprintf(tmp8,"%s",(yyvsp[(1) - (4)].strVal));}};}
+    { if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) { printf("Erreur : L'identificateur %s non declaree.\n", (yyvsp[(1) - (4)].strVal));}else {if ((yyvsp[(3) - (4)].INTEGER)>=atoi(Tailletab)){printf("Dépassement de la taille du tableau %s",(yyvsp[(1) - (4)].strVal));} else {strcpy(type,get_type((yyvsp[(1) - (4)].strVal))),sprintf(tmp8,"%s",(yyvsp[(1) - (4)].strVal));}};}
     break;
 
   case 54:
 
 /* Line 1455 of yacc.c  */
 #line 156 "bisony.y"
-    {  if (check_declaration((yyvsp[(1) - (6)].strVal)) != 0) {printf("Erreur : L'identificateur %s non declaree.\n", (yyvsp[(1) - (6)].strVal));}else {if ((yyvsp[(3) - (6)].INTEGER)>=atoi(Tailleun) || (yyvsp[(5) - (6)].INTEGER)>=atoi(Tailledeux)){printf("Dépassement de la taille du matrice %s",(yyvsp[(1) - (6)].strVal));}else {strcpy(type,get_type((yyvsp[(1) - (6)].strVal)));sprintf(tmp8,"%s",(yyvsp[(1) - (6)].strVal));}};}
+    {  if (check_declaration((yyvsp[(1) - (6)].strVal)) == 0) {printf("Erreur : L'identificateur %s non declaree.\n", (yyvsp[(1) - (6)].strVal));}else {if ((yyvsp[(3) - (6)].INTEGER)>=atoi(Tailleun) || (yyvsp[(5) - (6)].INTEGER)>=atoi(Tailledeux)){printf("Dépassement de la taille du matrice %s",(yyvsp[(1) - (6)].strVal));}else {strcpy(type,get_type((yyvsp[(1) - (6)].strVal)));sprintf(tmp8,"%s",(yyvsp[(1) - (6)].strVal));}};}
     break;
 
   case 55:

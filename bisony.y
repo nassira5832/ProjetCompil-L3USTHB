@@ -152,8 +152,8 @@ a: var1 | IDENTIFIER{sprintf(tmp2,"%s",$1);} | Real{sprintf(tmp2,"%.2f",$1);spri
 
 // pour utiliser les vars
 
-var1: IDENTIFIER  PO INTEGER PF { if (check_declaration($1) != 0) { printf("Erreur : L'identificateur %s non declaree.\n", $1);}else {if ($3>=atoi(Tailletab)){printf("Dépassement de la taille du tableau %s",$1);} else {strcpy(type,get_type($1)),sprintf(tmp8,"%s",$1);}}}
-     | IDENTIFIER  PO INTEGER V INTEGER PF {  if (check_declaration($1) != 0) {printf("Erreur : L'identificateur %s non declaree.\n", $1);}else {if ($3>=atoi(Tailleun) || $5>=atoi(Tailledeux)){printf("Dépassement de la taille du matrice %s",$1);}else {strcpy(type,get_type($1));sprintf(tmp8,"%s",$1);}}}
+var1: IDENTIFIER  PO INTEGER PF { if (check_declaration($1) == 0) { printf("Erreur : L'identificateur %s non declaree.\n", $1);}else {if ($3>=atoi(Tailletab)){printf("Dépassement de la taille du tableau %s",$1);} else {strcpy(type,get_type($1)),sprintf(tmp8,"%s",$1);}}}
+     | IDENTIFIER  PO INTEGER V INTEGER PF {  if (check_declaration($1) == 0) {printf("Erreur : L'identificateur %s non declaree.\n", $1);}else {if ($3>=atoi(Tailleun) || $5>=atoi(Tailledeux)){printf("Dépassement de la taille du matrice %s",$1);}else {strcpy(type,get_type($1));sprintf(tmp8,"%s",$1);}}}
 
 
 

@@ -6,6 +6,8 @@ ENDR
 
 PROGRAM
 prog
-INTEGER j , i  ;
+REAL n ; 
+INTEGER i ; 
 If (i.EQ.2) Then i=4; i=5; i=3; Else i=2; i=6;EndIf
+n=1.0;
 END 
