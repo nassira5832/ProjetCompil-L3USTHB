@@ -1,12 +1,14 @@
 INTEGER Routine fun (var1)
 INTEGER a;  
 a=2; 
-If(a .GT. a) Then a=5; Else a=1; EndIf
 fun=a;
 ENDR
 
 PROGRAM
-prog 
-INTEGER i ; 
-DoWhile (true) WRITE("test",b); EndDo
-END 
+prog
+INTEGER j , i  ;
+j=7;
+If (i.EQ.2) Then i=4; i=5; i=3; Else i=2; i=6;EndIf
+DoWhile (i .LT.  10) WRITE("test",n); i=i+2; EndDo
+WRITE("test",n); 
+END

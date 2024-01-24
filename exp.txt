@@ -1,13 +1,8 @@
-INTEGER Routine fun (var1)
-INTEGER a, b ;  
-b=var1; 
-fun=a;
-ENDR
 INTEGER Routine xxx ( var2)
 INTEGER c ;  
 c=4;
 If (c .LT. 2)Then c=2 ; Else c=3;EndIf
-fun=a;
+xxx=a;
 ENDR
 PROGRAM
 prog
@@ -17,6 +12,5 @@ Logical b;
 n=1;
 %test test 
 READ(b);
-DoWhile (true) WRITE("test",b); EndDo
 WRITE("test",b); 
 END
