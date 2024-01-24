@@ -169,7 +169,8 @@ void print() {
 // Fonction pour vérifier la déclaration dans la liste chaînée des identificateurs et constantes
 int check_declaration(char entity[]) {
     int pos = search(entity, 0);
-    if (pos != -1 && strcmp(headIdfCst[pos].type, "") != 0)
+    if (pos != -1 ) {
         return 1;  // L'entité est déclarée
+    }
     return 0;      // L'entité n'est pas déclarée
 }

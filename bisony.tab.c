@@ -519,7 +519,7 @@ static const yytype_uint16 yyrline[] =
      132,   133,   134,   135,   138,   139,   141,   143,   145,   147,
      147,   147,   147,   155,   156,   163,   174,   176,   177,   179,
      180,   181,   188,   191,   196,   198,   199,   200,   201,   211,
-     222,   232,   242,   252,   264,   265,   272,   278,   279,   287
+     222,   232,   242,   252,   264,   266,   273,   279,   280,   288
 };
 #endif
 
@@ -1889,10 +1889,18 @@ if (strcmp((yyvsp[(2) - (4)].strVal),".NE.")==0) strcpy(tmp5,"BE");
  quadr(tmp5,"",(yyvsp[(1) - (4)].strVal),tmp3);t++;;}
     break;
 
+  case 74:
+
+/* Line 1455 of yacc.c  */
+#line 264 "bisony.y"
+    {  
+                               ;}
+    break;
+
   case 75:
 
 /* Line 1455 of yacc.c  */
-#line 265 "bisony.y"
+#line 266 "bisony.y"
     { end_if=t;
                    sprintf(tmp,"%d",t-2);
                    quadr("BR", tmp,"empty", "empty"); 
@@ -1904,7 +1912,7 @@ if (strcmp((yyvsp[(2) - (4)].strVal),".NE.")==0) strcpy(tmp5,"BE");
 
 
 /* Line 1455 of yacc.c  */
-#line 1908 "bisony.tab.c"
+#line 1916 "bisony.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2116,7 +2124,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 292 "bisony.y"
+#line 293 "bisony.y"
 
 main () 
 {
