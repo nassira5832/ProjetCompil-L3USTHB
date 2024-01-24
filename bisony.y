@@ -185,37 +185,80 @@ message_suffix: V IDENTIFIER message_suffix
 
 
 /*************************************** Condition**************************/
-Condition:  B Kw_Else inst_list Kw_EndIf {  sprintf(tmp,"%d",t+1);  
-                              update_quad(end_if,1,tmp); };
+Condition:  B Kw_Else inst_list Kw_EndIf {  sprintf(tmp,"%d",t);  
+                              update_quad(end_if,1,tmp);
+                               };
 B: A inst_list { end_if=t;
                    quadr("BR", "","empty", "empty"); 
 				   sprintf(tmp,"%d",t+1);
-                   update_quad(begin_else,1,tmp);}
+                   update_quad(begin_else,1,tmp);
+                   t++;}
 A:Kw_If PO CNDs PF Kw_Then
 
 CND: or  CNDs 
     |and CNDs 
     |/*vide*/;
-CNDs: var1 COMPARISON var1 CND
-| expression COMPARISON expression CND
-| var1 COMPARISON expression CND
-| expression COMPARISON var1 CND
-| IDENTIFIER COMPARISON IDENTIFIER CND
-|IDENTIFIER COMPARISON INTEGER CND
-{sprintf(tmp,"%d",$3);begin_else=t;
-if (strcmp($2,".EQ.")==0) strcpy(tmp5,"BNE");
-if (strcmp($2,".LT.")==0) strcpy(tmp5,"BGE");
-if (strcmp($2,".GT.")==0) strcpy(tmp5,"BLE");
-if (strcmp($2,".LE.")==0) strcpy(tmp5,"BG");
-if (strcmp($2,".GE.")==0) strcpy(tmp5,"BL");
-if (strcmp($2,".NE.")==0) strcpy(tmp5,"BE");
- sprintf(tmp9,"%d",end_if);
- quadr(tmp5,"",$1,tmp);t++;}
-| IDENTIFIER COMPARISON var1 CND
-| IDENTIFIER COMPARISON expression CND
-| expression COMPARISON IDENTIFIER CND
-| var1 COMPARISON IDENTIFIER CND
-|Logical
+CNDs: var1 COMPARISON a CND
+                             {begin_else=t;
+                              if (strcmp($2,".EQ.")==0) strcpy(tmp5,"BNE");
+                              if (strcmp($2,".LT.")==0) strcpy(tmp5,"BGE");
+                              if (strcmp($2,".GT.")==0) strcpy(tmp5,"BLE");
+                              if (strcmp($2,".LE.")==0) strcpy(tmp5,"BG");
+                              if (strcmp($2,".GE.")==0) strcpy(tmp5,"BL");
+                              if (strcmp($2,".NE.")==0) strcpy(tmp5,"BE");
+                              sprintf(tmp9,"%d",end_if);
+                              quadr(tmp5,"",tmp8,tmp2);t++;}
+     |IDENTIFIER COMPARISON a CND
+                               {if (check_declaration($1)==0) {begin_else=t;
+                                if (strcmp($2,".EQ.")==0) strcpy(tmp5,"BNE");
+                                if (strcmp($2,".LT.")==0) strcpy(tmp5,"BGE");
+                                if (strcmp($2,".GT.")==0) strcpy(tmp5,"BLE");
+                                if (strcmp($2,".LE.")==0) strcpy(tmp5,"BG");
+                                if (strcmp($2,".GE.")==0) strcpy(tmp5,"BL");
+                                if (strcmp($2,".NE.")==0) strcpy(tmp5,"BE");
+                                 sprintf(tmp9,"%d",end_if);
+                                 quadr(tmp5,"",$1,tmp2);t++;} }
+
+     |expression COMPARISON a CND 
+                               {begin_else=t;
+                                if (strcmp($2,".EQ.")==0) strcpy(tmp5,"BNE");
+                                if (strcmp($2,".LT.")==0) strcpy(tmp5,"BGE");
+                                if (strcmp($2,".GT.")==0) strcpy(tmp5,"BLE");
+                                if (strcmp($2,".LE.")==0) strcpy(tmp5,"BG");
+                                if (strcmp($2,".GE.")==0) strcpy(tmp5,"BL");
+                                if (strcmp($2,".NE.")==0) strcpy(tmp5,"BE");
+                                sprintf(tmp9,"%d",end_if);
+                                quadr(tmp5,"",tmp3,tmp2);t++;}
+     |expression COMPARISON expression CND
+                                {begin_else=t;
+                                 if (strcmp($2,".EQ.")==0) strcpy(tmp5,"BNE");
+                                 if (strcmp($2,".LT.")==0) strcpy(tmp5,"BGE");
+                                 if (strcmp($2,".GT.")==0) strcpy(tmp5,"BLE");
+                                 if (strcmp($2,".LE.")==0) strcpy(tmp5,"BG");
+                                 if (strcmp($2,".GE.")==0) strcpy(tmp5,"BL");
+                                 if (strcmp($2,".NE.")==0) strcpy(tmp5,"BE");
+                                  sprintf(tmp9,"%d",end_if);
+                                  quadr(tmp5,"",tmp3,tmp3);t++;}
+     |var1 COMPARISON expression CND
+                               {begin_else=t;
+                                 if (strcmp($2,".EQ.")==0) strcpy(tmp5,"BNE");
+                                 if (strcmp($2,".LT.")==0) strcpy(tmp5,"BGE");
+                                 if (strcmp($2,".GT.")==0) strcpy(tmp5,"BLE");
+                                 if (strcmp($2,".LE.")==0) strcpy(tmp5,"BG");
+                                 if (strcmp($2,".GE.")==0) strcpy(tmp5,"BL");
+                                 if (strcmp($2,".NE.")==0) strcpy(tmp5,"BE");
+                                 sprintf(tmp9,"%d",end_if);
+                                 quadr(tmp5,"",tmp8,tmp3);t++;}
+     |IDENTIFIER COMPARISON expression CND
+                                          {if (check_declaration ($1)==0){begin_else=t;
+                                           if (strcmp($2,".EQ.")==0) strcpy(tmp5,"BNE");
+                                           if (strcmp($2,".LT.")==0) strcpy(tmp5,"BGE");
+                                           if (strcmp($2,".GT.")==0) strcpy(tmp5,"BLE");
+                                           if (strcmp($2,".LE.")==0) strcpy(tmp5,"BG");
+                                           if (strcmp($2,".GE.")==0) strcpy(tmp5,"BL");
+                                           if (strcmp($2,".NE.")==0) strcpy(tmp5,"BE");
+                                            sprintf(tmp9,"%d",end_if);
+                                            quadr(tmp5,"",$1,tmp3);t++;}}
 
 /****************************Boucle********************************************/
 Boucle: Kw_Dowhile PO CNDs PF inst_list Kw_EndDo;
@@ -223,7 +266,7 @@ Boucle: Kw_Dowhile PO CNDs PF inst_list Kw_EndDo;
 
 
 
-/**********************l'appel************************************************/
+/**********************l'appel d'une fonction************************************************/
 Appelf: var1 AFF Kw_CALL IDENTIFIER PO parameter_list PF PV 
 	   |IDENTIFIER AFF Kw_CALL IDENTIFIER PO parameter_list PF PV 
 
