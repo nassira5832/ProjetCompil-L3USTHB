@@ -122,25 +122,25 @@ instruction: affectation
 ///////////affecation////////////////////////
 
 
-affectation: var1 AFF expression PV  { if(!(strcmp(type,"INTEGER")==0) && !(strcmp(type,"Real")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",tmp3," ",tmp8);t++;}} 
-             |IDENTIFIER AFF expression PV  { if(check_declaration($1) == 0){printf("Variable %s non declaree(utilisee a la ligne %d).\n",$1,nb_line-1);YYABORT;} else {if(strcmp(get_type($1),"Real")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_line,$1,get_type($1));} else {quadr(":=",tmp3," ",$1);t++;}}}
-             |var1 AFF INTEGER PV     { sprintf(buffer, "%d", $3);printf(buffer); if(!(strcmp(type,"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",tmp8);t++;}} 
-			 |IDENTIFIER AFF INTEGER PV { sprintf(buffer, "%d", $3);printf(buffer); if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  if(strcmp(get_type($1),"Real")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",$1);t++;}}} 
-             |var1 AFF Real PV  { sprintf(buffer, "%f", $3);printf(buffer); if(!(strcmp(type,"Real")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",tmp8);t++;}}  
-             |IDENTIFIER AFF Real PV { sprintf(buffer, "%f", $3);printf(buffer); if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  if(strcmp(get_type($1),"Real")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",$1);t++;}}} 
+affectation: var1 AFF expression PV  {/* if(!(strcmp(type,"INTEGER")==0) && !(strcmp(type,"Real")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else */ { quadr(":=",tmp3," ",tmp8);t++;}} 
+             |IDENTIFIER AFF expression PV  { if(check_declaration($1) == 0){printf("Variable %s non declaree(utilisee a la ligne %d).\n",$1,nb_line-1);YYABORT;} else /*{if(strcmp(get_type($1),"REAL")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_line,$1,get_type($1));} else*/ {quadr(":=",tmp3," ",$1);t++;}}//}
+             |var1 AFF INTEGER PV     { sprintf(buffer, "%d", $3); /*if(!(strcmp(type,"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else*/ { quadr(":=",buffer," ",tmp8);t++;}} 
+			 |IDENTIFIER AFF INTEGER PV { sprintf(buffer, "%d", $3); if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else/* {  if( !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);printf(get_type($1));} else*/ { quadr(":=",buffer," ",$1);t++;}}//} 
+             |var1 AFF Real PV  { sprintf(buffer, "%f", $3); /*if(!(strcmp(type,"Real")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else*/ { quadr(":=",buffer," ",tmp8);t++;}}  
+             |IDENTIFIER AFF Real PV { sprintf(buffer, "%f", $3); if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  /*if(strcmp(get_type($1),"REAL")!=0 ) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d  \n ",nb_line); printf(get_type($1));} else*/ { quadr(":=",buffer," ",$1);t++;}}} 
              |var1 AFF var1 PV { quadr(":=",tmp8," ",tmp8);t++;}
-			 |IDENTIFIER AFF IDENTIFIER PV{ if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {if (check_declaration($3) == 0) {printf("Erreur : identificateur %s non declarer. \n", $3); } else {if(strcmp(get_type($1),get_type($3))==0) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",$3," ",$1);t++;}}}}
-             |IDENTIFIER AFF var1 PV { if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  if(strcmp(get_type($1),type)!=0 ) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",tmp8," ",$1);t++;}}} 
-             |var1 AFF CHARACTER PV  { sprintf(buffer, "%s", $3); if(!(strcmp(type,"CHARACTER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",tmp8);t++;}}  
-             |IDENTIFIER AFF CHARACTER PV{strcpy(buffer,$3); if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  if(strcmp(get_type($1),"Real")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",""," ",$1);t++;}}}
+			 |IDENTIFIER AFF IDENTIFIER PV{ if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {if (check_declaration($3) == 0) {printf("Erreur : identificateur %s non declarer. \n", $3); } else {/*if(strcmp(get_type($1),get_type($3))==0) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else*/ { quadr(":=",$3," ",$1);t++;}}}}
+             |IDENTIFIER AFF var1 PV { if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else { /* if(strcmp(get_type($1),type)!=0 ) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else*/ { quadr(":=",tmp8," ",$1);t++;}}} 
+             |var1 AFF CHARACTER PV  { sprintf(buffer, "%s", $3); /*if(!(strcmp(type,"CHARACTER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else*/ { quadr(":=",buffer," ",tmp8);t++;}}  
+             |IDENTIFIER AFF CHARACTER PV{strcpy(buffer,$3); if (check_declaration($1) == 0) {printf("Erreur : identificateur %s non declarer. \n", $1); } else {  /*if(strcmp(get_type($1),"CHARACTER")!=0) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else */{ quadr(":=",""," ",$1);t++;}}}
 
 
  expression:  a OPERATOR var1 expression 
-			|a OPERATOR IDENTIFIER expression {if( $3==0 && strcmp("DIV",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_line);YYABORT;} 
+			|a OPERATOR IDENTIFIER expression {if( $3==0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d  \n ",nb_line);/*YYABORT;*/} 
 			else {sprintf(tmp,"%s",$3);sprintf(tmp3,"T%d",t);quadr($2,tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
-            |a OPERATOR INTEGER expression {if( $3==0 && strcmp("DIV",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_line);YYABORT;} 
+            |a OPERATOR INTEGER expression {if( $3==0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d  \n ",nb_line);/*YYABORT;*/} 
 			else {sprintf(tmp,"%d",$3);sprintf(tmp3,"T%d",t);quadr($2,tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
-            |a OPERATOR Real expression {if( $3==0.0 && strcmp("DIV",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_line);YYABORT;} 
+            |a OPERATOR Real expression {if( $3==0.0 && strcmp("/",$2)==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d  \n ",nb_line);YYABORT;} 
 			else {sprintf(tmp,"%f",$3);sprintf(tmp3,"T%d",t);quadr($2,tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;}}
             |/*vide*/;
 
@@ -152,8 +152,8 @@ a: var1 | IDENTIFIER{sprintf(tmp2,"%s",$1);} | Real{sprintf(tmp2,"%.2f",$1);spri
 
 // pour utiliser les vars
 
-var1: IDENTIFIER  PO INTEGER PF { if (check_declaration($1) == 0) { printf("Erreur : L'identificateur %s non declaree.\n", $1);}else {if ($3>=atoi(Tailletab)){printf("Dépassement de la taille du tableau %s",$1);} else {strcpy(type,get_type($1)),sprintf(tmp8,"%s",$1);}}}
-     | IDENTIFIER  PO INTEGER V INTEGER PF {  if (check_declaration($1) == 0) {printf("Erreur : L'identificateur %s non declaree.\n", $1);}else {if ($3>=atoi(Tailleun) || $5>=atoi(Tailledeux)){printf("Dépassement de la taille du matrice %s",$1);}else {strcpy(type,get_type($1));sprintf(tmp8,"%s",$1);}}}
+var1: IDENTIFIER  PO INTEGER PF { if (check_declaration($1) == 0) { printf("Erreur : L'identificateur %s non declaree.\n", $1);}else {if ($3>=atoi(Tailletab)){printf("Dépassement de la taille du tableau %s",$1);} else {/*strcpy(type,get_type($1));*/sprintf(tmp8,"%s",$1);}}}
+     | IDENTIFIER  PO INTEGER V INTEGER PF {  if (check_declaration($1) == 0) {printf("Erreur : L'identificateur %s non declaree.\n", $1);}else {if ($3>=atoi(Tailleun) || $5>=atoi(Tailledeux)){printf("Dépassement de la taille du matrice %s",$1);}else {/*strcpy(type,get_type($1));*/sprintf(tmp8,"%s",$1);}}}
 
 
 
@@ -261,8 +261,7 @@ if (strcmp($2,".NE.")==0) strcpy(tmp5,"BE");
  quadr(tmp5,"",$1,tmp3);t++;}
 
 /****************************Boucle********************************************/
-Boucle: D Kw_EndDo  {  
-                               };
+Boucle: D Kw_EndDo  
 D: C inst_list { end_if=t;
                    sprintf(tmp,"%d",t-2);
                    quadr("BR", tmp,"empty", "empty"); 
@@ -284,8 +283,10 @@ Appelf: var1 AFF Kw_CALL IDENTIFIER PO parameter_list PF PV
 
 
 
-/********************Equivalence*********************************************/
+/********************Equivalence************************************************/
 Equivalence: Kw_EQUIVALENCE PO parameter_list PF;
+
+
 
 
 

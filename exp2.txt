@@ -8,7 +8,7 @@ PROGRAM
 prog
 INTEGER j , i  ;
 j=7;
-If (i.EQ.2) Then i=4; i=5; i=3; Else i=2; i=6;EndIf
+If (i.EQ.2) Then If ( i.EQ. 4) Then i=5; Else i=3; EndIf  Else i=2; i=6;EndIf
 DoWhile (i .LT. j+10) WRITE("test",n); i=i+2; EndDo
 WRITE("test",n); 
 END

@@ -106,13 +106,13 @@ void insertKw(char entity[], char code[]) {
 }
 
 //avoir  le type 
-char* get_type(char entity[]) {
+/*char* get_type(char entity[]) {
     int pos = search(entity, 0);
     if (pos != -1) {
         return headIdfCst[pos].type;
     }
-    return "";
-}
+    return "rien";
+}*/
 // Fonction pour afficher la liste chaînée des identificateurs et constantes
 
 void printIdfCstList() {
@@ -164,13 +164,13 @@ void print() {
     printIdfCstList();
     printSepKwList();
     printKwList();
-    // Ajoutez d'autres fonctions similaires pour les listes chaînées manquantes si nécessaire.
+   
 }
 // Fonction pour vérifier la déclaration dans la liste chaînée des identificateurs et constantes
 int check_declaration(char entity[]) {
     int pos = search(entity, 0);
     if (pos != -1 ) {
-        return 1;  // L'entité est déclarée
+        return 1;  
     }
-    return 0;      // L'entité n'est pas déclarée
+    return 0;    
 }

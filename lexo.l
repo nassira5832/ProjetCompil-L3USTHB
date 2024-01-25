@@ -49,11 +49,11 @@ DIMENSION  { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_DI
 {Logical} return Logical;
 
 {IDENTIFIER} {
-    // Vérifier la longueur de l'identificateur
+    
     if (yyleng > 10) {
         printf("L'identificateur %s dans la ligne %d est trop grand !\n", yytext, nb_line);
     } else {
-        // Insérer l'identificateur dans la table des identificateurs
+       
         
          insertIdfCst(yytext, "idf", save_type);
         yylval.strVal = strdup(yytext);
@@ -106,6 +106,7 @@ DIMENSION  { insertKw(yytext, "KW"); yylval.strVal = strdup(yytext);return Kw_DI
 
 \n			nb_line++;
 .			{printf ("erreur lexicale: entite non reconnue a la ligne %d\n",nb_line);}
+
 
 
 %%

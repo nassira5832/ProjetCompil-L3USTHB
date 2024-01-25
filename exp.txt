@@ -6,11 +6,13 @@ xxx=a;
 ENDR
 PROGRAM
 prog
-REAL A DIMENSION (1,2);
-INTEGER a ,n; 
-Logical b; 
-n=1;
+INTEGER A DIMENSION (2);
+INTEGER a ,n,i,j;  
+n=3;
+p=5;
+A(1)=5;
 %test test 
-READ(b);
-WRITE("test",b); 
+j=5+2;
+i=2+i;
+
 END

@@ -519,7 +519,7 @@ static const yytype_uint16 yyrline[] =
      132,   133,   134,   135,   138,   139,   141,   143,   145,   147,
      147,   147,   147,   155,   156,   163,   174,   176,   177,   179,
      180,   181,   188,   191,   196,   198,   199,   200,   201,   211,
-     222,   232,   242,   252,   264,   266,   273,   279,   280,   288
+     222,   232,   242,   252,   264,   265,   272,   278,   279,   287
 };
 #endif
 
@@ -1635,42 +1635,42 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 125 "bisony.y"
-    { if(!(strcmp(type,"INTEGER")==0) && !(strcmp(type,"Real")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",tmp3," ",tmp8);t++;};}
+    {/* if(!(strcmp(type,"INTEGER")==0) && !(strcmp(type,"Real")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else */ { quadr(":=",tmp3," ",tmp8);t++;};}
     break;
 
   case 34:
 
 /* Line 1455 of yacc.c  */
 #line 126 "bisony.y"
-    { if(check_declaration((yyvsp[(1) - (4)].strVal)) == 0){printf("Variable %s non declaree(utilisee a la ligne %d).\n",(yyvsp[(1) - (4)].strVal),nb_line-1);YYABORT;} else {if(strcmp(get_type((yyvsp[(1) - (4)].strVal)),"Real")!=0 && !(strcmp(get_type((yyvsp[(1) - (4)].strVal)),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_line,(yyvsp[(1) - (4)].strVal),get_type((yyvsp[(1) - (4)].strVal)));} else {quadr(":=",tmp3," ",(yyvsp[(1) - (4)].strVal));t++;}};}
+    { if(check_declaration((yyvsp[(1) - (4)].strVal)) == 0){printf("Variable %s non declaree(utilisee a la ligne %d).\n",(yyvsp[(1) - (4)].strVal),nb_line-1);YYABORT;} else /*{if(strcmp(get_type($1),"REAL")!=0 && !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d . La variable: %s declare commme %s  \n ",nb_line,$1,get_type($1));} else*/ {quadr(":=",tmp3," ",(yyvsp[(1) - (4)].strVal));t++;};}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
 #line 127 "bisony.y"
-    { sprintf(buffer, "%d", (yyvsp[(3) - (4)].INTEGER));printf(buffer); if(!(strcmp(type,"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",tmp8);t++;};}
+    { sprintf(buffer, "%d", (yyvsp[(3) - (4)].INTEGER)); /*if(!(strcmp(type,"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else*/ { quadr(":=",buffer," ",tmp8);t++;};}
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
 #line 128 "bisony.y"
-    { sprintf(buffer, "%d", (yyvsp[(3) - (4)].INTEGER));printf(buffer); if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(1) - (4)].strVal)); } else {  if(strcmp(get_type((yyvsp[(1) - (4)].strVal)),"Real")!=0 && !(strcmp(get_type((yyvsp[(1) - (4)].strVal)),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",(yyvsp[(1) - (4)].strVal));t++;}};}
+    { sprintf(buffer, "%d", (yyvsp[(3) - (4)].INTEGER)); if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(1) - (4)].strVal)); } else/* {  if( !(strcmp(get_type($1),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);printf(get_type($1));} else*/ { quadr(":=",buffer," ",(yyvsp[(1) - (4)].strVal));t++;};}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
 #line 129 "bisony.y"
-    { sprintf(buffer, "%f", (yyvsp[(3) - (4)].Real));printf(buffer); if(!(strcmp(type,"Real")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",tmp8);t++;};}
+    { sprintf(buffer, "%f", (yyvsp[(3) - (4)].Real)); /*if(!(strcmp(type,"Real")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else*/ { quadr(":=",buffer," ",tmp8);t++;};}
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
 #line 130 "bisony.y"
-    { sprintf(buffer, "%f", (yyvsp[(3) - (4)].Real));printf(buffer); if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(1) - (4)].strVal)); } else {  if(strcmp(get_type((yyvsp[(1) - (4)].strVal)),"Real")!=0 && !(strcmp(get_type((yyvsp[(1) - (4)].strVal)),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",(yyvsp[(1) - (4)].strVal));t++;}};}
+    { sprintf(buffer, "%f", (yyvsp[(3) - (4)].Real)); if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(1) - (4)].strVal)); } else {  /*if(strcmp(get_type($1),"REAL")!=0 ) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d  \n ",nb_line); printf(get_type($1));} else*/ { quadr(":=",buffer," ",(yyvsp[(1) - (4)].strVal));t++;}};}
     break;
 
   case 39:
@@ -1684,35 +1684,35 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 132 "bisony.y"
-    { if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(1) - (4)].strVal)); } else {if (check_declaration((yyvsp[(3) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(3) - (4)].strVal)); } else {if(strcmp(get_type((yyvsp[(1) - (4)].strVal)),get_type((yyvsp[(3) - (4)].strVal)))==0) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",(yyvsp[(3) - (4)].strVal)," ",(yyvsp[(1) - (4)].strVal));t++;}}};}
+    { if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(1) - (4)].strVal)); } else {if (check_declaration((yyvsp[(3) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(3) - (4)].strVal)); } else {/*if(strcmp(get_type($1),get_type($3))==0) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else*/ { quadr(":=",(yyvsp[(3) - (4)].strVal)," ",(yyvsp[(1) - (4)].strVal));t++;}}};}
     break;
 
   case 41:
 
 /* Line 1455 of yacc.c  */
 #line 133 "bisony.y"
-    { if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(1) - (4)].strVal)); } else {  if(strcmp(get_type((yyvsp[(1) - (4)].strVal)),type)!=0 ) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",tmp8," ",(yyvsp[(1) - (4)].strVal));t++;}};}
+    { if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(1) - (4)].strVal)); } else { /* if(strcmp(get_type($1),type)!=0 ) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else*/ { quadr(":=",tmp8," ",(yyvsp[(1) - (4)].strVal));t++;}};}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
 #line 134 "bisony.y"
-    { sprintf(buffer, "%s", (yyvsp[(3) - (4)].strVal)); if(!(strcmp(type,"CHARACTER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",buffer," ",tmp8);t++;};}
+    { sprintf(buffer, "%s", (yyvsp[(3) - (4)].strVal)); /*if(!(strcmp(type,"CHARACTER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else*/ { quadr(":=",buffer," ",tmp8);t++;};}
     break;
 
   case 43:
 
 /* Line 1455 of yacc.c  */
 #line 135 "bisony.y"
-    {strcpy(buffer,(yyvsp[(3) - (4)].strVal)); if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(1) - (4)].strVal)); } else {  if(strcmp(get_type((yyvsp[(1) - (4)].strVal)),"Real")!=0 && !(strcmp(get_type((yyvsp[(1) - (4)].strVal)),"INTEGER")==0)) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else { quadr(":=",""," ",(yyvsp[(1) - (4)].strVal));t++;}};}
+    {strcpy(buffer,(yyvsp[(3) - (4)].strVal)); if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) {printf("Erreur : identificateur %s non declarer. \n", (yyvsp[(1) - (4)].strVal)); } else {  /*if(strcmp(get_type($1),"CHARACTER")!=0) {printf("-----------ERREUR SEMANTIQUE de type d'affectation ! LIGNE : %d \n ",nb_line);} else */{ quadr(":=",""," ",(yyvsp[(1) - (4)].strVal));t++;}};}
     break;
 
   case 45:
 
 /* Line 1455 of yacc.c  */
 #line 139 "bisony.y"
-    {if( (yyvsp[(3) - (4)].strVal)==0 && strcmp("DIV",(yyvsp[(2) - (4)].strVal))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_line);YYABORT;} 
+    {if( (yyvsp[(3) - (4)].strVal)==0 && strcmp("/",(yyvsp[(2) - (4)].strVal))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d  \n ",nb_line);/*YYABORT;*/} 
 			else {sprintf(tmp,"%s",(yyvsp[(3) - (4)].strVal));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (4)].strVal),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;};}
     break;
 
@@ -1720,7 +1720,7 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 141 "bisony.y"
-    {if( (yyvsp[(3) - (4)].INTEGER)==0 && strcmp("DIV",(yyvsp[(2) - (4)].strVal))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_line);YYABORT;} 
+    {if( (yyvsp[(3) - (4)].INTEGER)==0 && strcmp("/",(yyvsp[(2) - (4)].strVal))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d  \n ",nb_line);/*YYABORT;*/} 
 			else {sprintf(tmp,"%d",(yyvsp[(3) - (4)].INTEGER));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (4)].strVal),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;};}
     break;
 
@@ -1728,7 +1728,7 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 143 "bisony.y"
-    {if( (yyvsp[(3) - (4)].Real)==0.0 && strcmp("DIV",(yyvsp[(2) - (4)].strVal))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d colonne %d \n ",nb_line);YYABORT;} 
+    {if( (yyvsp[(3) - (4)].Real)==0.0 && strcmp("/",(yyvsp[(2) - (4)].strVal))==0) {printf("ERREUR SEMANTIQUE : division par zero ligne %d  \n ",nb_line);YYABORT;} 
 			else {sprintf(tmp,"%f",(yyvsp[(3) - (4)].Real));sprintf(tmp3,"T%d",t);quadr((yyvsp[(2) - (4)].strVal),tmp2,tmp,tmp3);sprintf(tmp2,"T%d",t);t=t+1;};}
     break;
 
@@ -1757,14 +1757,14 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 155 "bisony.y"
-    { if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) { printf("Erreur : L'identificateur %s non declaree.\n", (yyvsp[(1) - (4)].strVal));}else {if ((yyvsp[(3) - (4)].INTEGER)>=atoi(Tailletab)){printf("Dépassement de la taille du tableau %s",(yyvsp[(1) - (4)].strVal));} else {strcpy(type,get_type((yyvsp[(1) - (4)].strVal))),sprintf(tmp8,"%s",(yyvsp[(1) - (4)].strVal));}};}
+    { if (check_declaration((yyvsp[(1) - (4)].strVal)) == 0) { printf("Erreur : L'identificateur %s non declaree.\n", (yyvsp[(1) - (4)].strVal));}else {if ((yyvsp[(3) - (4)].INTEGER)>=atoi(Tailletab)){printf("Dépassement de la taille du tableau %s",(yyvsp[(1) - (4)].strVal));} else {/*strcpy(type,get_type($1));*/sprintf(tmp8,"%s",(yyvsp[(1) - (4)].strVal));}};}
     break;
 
   case 54:
 
 /* Line 1455 of yacc.c  */
 #line 156 "bisony.y"
-    {  if (check_declaration((yyvsp[(1) - (6)].strVal)) == 0) {printf("Erreur : L'identificateur %s non declaree.\n", (yyvsp[(1) - (6)].strVal));}else {if ((yyvsp[(3) - (6)].INTEGER)>=atoi(Tailleun) || (yyvsp[(5) - (6)].INTEGER)>=atoi(Tailledeux)){printf("Dépassement de la taille du matrice %s",(yyvsp[(1) - (6)].strVal));}else {strcpy(type,get_type((yyvsp[(1) - (6)].strVal)));sprintf(tmp8,"%s",(yyvsp[(1) - (6)].strVal));}};}
+    {  if (check_declaration((yyvsp[(1) - (6)].strVal)) == 0) {printf("Erreur : L'identificateur %s non declaree.\n", (yyvsp[(1) - (6)].strVal));}else {if ((yyvsp[(3) - (6)].INTEGER)>=atoi(Tailleun) || (yyvsp[(5) - (6)].INTEGER)>=atoi(Tailledeux)){printf("Dépassement de la taille du matrice %s",(yyvsp[(1) - (6)].strVal));}else {/*strcpy(type,get_type($1));*/sprintf(tmp8,"%s",(yyvsp[(1) - (6)].strVal));}};}
     break;
 
   case 55:
@@ -1889,18 +1889,10 @@ if (strcmp((yyvsp[(2) - (4)].strVal),".NE.")==0) strcpy(tmp5,"BE");
  quadr(tmp5,"",(yyvsp[(1) - (4)].strVal),tmp3);t++;;}
     break;
 
-  case 74:
-
-/* Line 1455 of yacc.c  */
-#line 264 "bisony.y"
-    {  
-                               ;}
-    break;
-
   case 75:
 
 /* Line 1455 of yacc.c  */
-#line 266 "bisony.y"
+#line 265 "bisony.y"
     { end_if=t;
                    sprintf(tmp,"%d",t-2);
                    quadr("BR", tmp,"empty", "empty"); 
@@ -1912,7 +1904,7 @@ if (strcmp((yyvsp[(2) - (4)].strVal),".NE.")==0) strcpy(tmp5,"BE");
 
 
 /* Line 1455 of yacc.c  */
-#line 1916 "bisony.tab.c"
+#line 1908 "bisony.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2124,7 +2116,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 293 "bisony.y"
+#line 292 "bisony.y"
 
 main () 
 {

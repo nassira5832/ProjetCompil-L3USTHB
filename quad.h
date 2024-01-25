@@ -22,7 +22,7 @@ void quadr(char op[],char arg1[],char arg2[],char result[])
 	strcpy(quad[qc].result,result);
 	
 	
-qc++;
+qc=qc+1;
 
 }
 
